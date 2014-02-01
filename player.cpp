@@ -63,6 +63,32 @@ void Player::setStatus(int status)
     }
 }
 
+void Player::setPosX(int x)
+{
+    if(x >= 0 || x <= 6 )
+    {
+        position[0] = x;
+    }
+}
+
+void Player::setPosY(int y)
+{
+    if(y >= 0 || y <= 6 )
+    {
+        position[0] = y;
+    }
+}
+
+int Player::getPosX()
+{
+    return position[0];
+}
+
+int Player::getPosY()
+{
+    return position[1];
+}
+
 int Player::getAction()
 {
     int n=rand()%100;

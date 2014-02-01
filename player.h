@@ -15,6 +15,7 @@ private:
     int team_ball[3] = {75, 28, 7};
     int opp_ball[3] = {93, 42, 1};
     int status;
+    int position[2];
     const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3;
 
 
@@ -24,8 +25,14 @@ public:
     void setAgility(int agility);
     void setPass(int pass);
     void setJumping(int jumping);
-    int getAction();
+    void setPosX(int x);
+    void setPosY(int y);
     void setStatus(int status);
+
+    int getPosX();
+    int getPosY();
+    int getAction();
+
 
 };
 
