@@ -9,10 +9,12 @@ class Match
 private:
     Team *teamOne, *teamTwo;
     void pass(Player *p);
-    void moveUp(Player *p, int team);
-    void moveBack(Player *p, int team);
-    void moveLeft(Player *p, int team);
-    void moveRight(Player *p, int team);
+    void moveUp(Player *p);
+    void moveBack(Player *p);
+    void moveLeft(Player *p);
+    void moveRight(Player *p);
+    void attack(Player *p);
+
 
 public:
     Match();

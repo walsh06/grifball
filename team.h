@@ -11,6 +11,7 @@ private:
 
 public:
     Team();
+    Player* getPlayer(int playerNum);
 };
 
 #endif // TEAM_H
