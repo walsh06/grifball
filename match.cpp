@@ -2,14 +2,17 @@
 
 Match::Match()
 {
-    teamOne = new Team();
+    teamOne = new Team(1);
+    teamTwo = new Team(2);
+    srand( time(0));
 }
 
 void Match::sim()
 {
-    for(int i = 0; i < 4; i++)
+    setMoveOrder();
+    for(int i = 0; i < 10; i++)
     {
-        Player p = *teamOne->getPlayer(i);
+        Player p = *playersToMove[i];
         int act = p.getAction();
         cout << p.getName();
         if(act == p.MOVE_UP)
@@ -107,5 +110,35 @@ void Match::moveRight(Player *p)
     else if(team == 2)
     {
         p->setPosY(p->getPosY() + 1);
+    }
+}
+
+void Match::setMoveOrder()
+{
+    playersToMove.clear();
+    for(int i = 0; i < 5; i++)
+    {
+        Player* currentPlayer = teamOne->getPlayer(i);
+        int n=rand()%10;
+        currentPlayer->setMove(n + currentPlayer->getAgility());
+        vector<Player *>::iterator it = playersToMove.begin();
+        for(int j = 0;j < playersToMove.size() && currentPlayer->getMove() < playersToMove[j]->getMove(); j++)
+        {
+            ++it;
+        }
+        playersToMove.insert(it, currentPlayer);
+    }
+
+    for(int i = 0; i < 5; i++)
+    {
+        Player* currentPlayer = teamTwo->getPlayer(i);
+        int n=rand()%10;
+        currentPlayer->setMove(n + currentPlayer->getAgility());
+        vector<Player *>::iterator it = playersToMove.begin();
+        for(int j = 0; currentPlayer->getMove() < playersToMove[j]->getMove(); j++)
+        {
+            ++it;
+        }
+        playersToMove.insert(it, currentPlayer);
     }
 }

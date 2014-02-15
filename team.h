@@ -10,8 +10,9 @@ private:
     vector <Player*> players;
 
 public:
-    Team();
+    Team(int);
     Player* getPlayer(int playerNum);
+    void addPlayer(Player *p);
 };
 
 #endif // TEAM_H

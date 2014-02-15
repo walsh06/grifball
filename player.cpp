@@ -9,6 +9,7 @@ Player::Player(string name, int attack, int pass, int jump, int agility)
     setJumping(jump);
     setPass(pass);
 
+    move = 0;
     srand( time(0));
     status = HAS_BALL;
     team = 1;
@@ -94,6 +95,11 @@ void Player::setStatus(int status)
     {
         this->status=status;
     }
+}
+
+void Player::setMove(int move)
+{
+    this->move = move;
 }
 
 void Player::setPosX(int x)
@@ -219,4 +225,14 @@ int Player::getTeam()
 string Player::getName()
 {
     return name;
+}
+
+int Player::getMove()
+{
+    return move;
+}
+
+int Player::getAgility()
+{
+    return agility;
 }

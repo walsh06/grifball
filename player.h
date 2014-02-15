@@ -26,6 +26,7 @@ private:
     int position[2];
     int team;
     int role;
+    int move;
     string name;
 
 public:
@@ -41,7 +42,10 @@ public:
     void setPosY(int y);
     void setStatus(int status);
     void setRole(int role);
+    void setMove(int move);
 
+    int getAgility();
+    int getMove();
     int getPosX();
     int getPosY();
     int getAction();
