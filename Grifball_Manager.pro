@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     player.cpp \
     team.cpp \
-    match.cpp
+    match.cpp \
+    ball.cpp
 
 HEADERS  += mainwindow.h \
     player.h \
     team.h \
-    match.h
+    match.h \
+    ball.h
 
 FORMS    += mainwindow.ui
