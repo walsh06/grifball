@@ -10,18 +10,22 @@ Match::Match()
 
 void Match::sim()
 {
-    for(int timer = 0; timer < 12; timer+=3)
+    for(int timer = 0; timer < 24; timer+=3)
     {
         cout<< "TIME: " << timer << endl;
     setMoveOrder();
-    setPlayerStatus();
+    setAllStatus();
     printer();
     int numPlayers = playersToMove.size();
-    for(int i = 0; i < numPlayers; i++)
+    for(int i = 0; i < playersToMove.size(); i++)
     {
         Player* p = playersToMove[i];
         int act = p->getAction();
+
+        checkBall(p);
+
         cout << p->getName();
+
         if(act == p->MOVE_UP)
         {
             moveUp(p);
@@ -46,6 +50,10 @@ void Match::sim()
         {
             moveToward(p);
         }
+        else if(act == p->ATTACK)
+        {
+            attack(p);
+        }
     }
     printer();
     }
@@ -53,12 +61,45 @@ void Match::sim()
 
 void Match::attack(Player *p)
 {
-    cout << " Attacks" << endl;
+    cout << " Attacks";
+    int n = p->getTeam(), oppTeam;
+    Player *opp;
+    if(n == 1)
+    {
+        oppTeam = 2;
+        opp = teamTwo->getPlayer(checkSquare(p, 1));
+    }
+    else if(n == 2)
+    {
+        oppTeam = 1;
+        opp = teamOne->getPlayer(checkSquare(p, 2));
+    }
+    int attackRoll = (rand()%11) + p->getAttack();
+    int dodgeRoll = (rand()%11) + opp->getJump();
+
+    if(attackRoll > dodgeRoll)
+    {
+        cout << " and Kills " << opp->getName() << endl;
+        opp->setStatus(opp->DEAD);
+        playersToMove.erase(playersToMove.begin()+ findPlayer(opp));
+        ball->drop();
+    }
+    else
+    {
+        cout << " but misses " << opp->getName() << endl;
+    }
+
 }
 
 void Match::pass(Player *p)
 {
     cout << " Pass" << endl;
+/*
+    for(int i = 0;i < 20; i++)
+    {
+    int n=rand()%11 + 1;
+    cout << "RAND: " << n << endl;
+    }*/
 
 }
 
@@ -168,6 +209,9 @@ void Match::moveToward(Player *p)
     }
 }
 
+//=======================
+//BALL
+//=======================
 void Match::checkBall(Player *p)
 {
     int x = ball->getPosX(), y =  ball->getPosY(), px = p->getPosX(), py = p->getPosY();
@@ -185,6 +229,8 @@ void Match::updateBall(Player *p)
     ball->setPosX(p->getPosX());
     ball->setPosY(p->getPosY());
 }
+
+//=========================
 
 void Match::setMoveOrder()
 {
@@ -215,56 +261,110 @@ void Match::setMoveOrder()
         playersToMove.insert(it, currentPlayer);
     }
 }
-
-void Match::setPlayerStatus()
+//=========================
+//PLAYER STATUS
+//=========================
+void Match::setAllStatus()
 {
-    if(ball->getTeam() == 1)
+    for(int i = 0; i < 5; i++)
     {
-        for(int i = 0; i < 5; i++)
-        {
-            Player* playerOne = teamOne->getPlayer(i);
-            Player* playerTwo = teamTwo->getPlayer(i);
+        Player* playerOne = teamOne->getPlayer(i);
+        Player* playerTwo = teamTwo->getPlayer(i);
+        setPlayerStatus(playerOne);
+        setPlayerStatus(playerTwo);
+    }
+}
 
-            if(playerOne->getNumber() == ball->getPlayer())
-            {
-                playerOne->setStatus(playerOne->HAS_BALL);
-            }
-            else
-            {
-                playerOne->setStatus(playerOne->TEAM_WITH_BALL);
-            }
-            playerTwo->setStatus(playerOne->WITHOUT_BALL);
+void Match::setPlayerStatus(Player* p)
+{
+    if(p->getStatus() == p->DEAD)
+    {
+        p->respawn();
+    }
+    int team = p->getTeam();
+    if(ball->getTeam() == team)
+    {
+        if(p->getNumber() == ball->getPlayer())
+        {
+            p->setStatus(p->HAS_BALL);
+        }
+        else if(checkSquare(p, team) != -1)
+        {
+            p->setStatus(p->OPP_IN_SQUARE);
+        }
+        else
+        {
+            p->setStatus(p->TEAM_WITH_BALL);
         }
     }
-    else if(ball->getTeam() == 2)
+    else if(ball->getTeam() == -1)
     {
-        for(int i = 0; i < 5; i++)
+        if(checkSquare(p, team) != -1)
         {
-            Player* playerOne = teamOne->getPlayer(i);
-            Player* playerTwo = teamTwo->getPlayer(i);
-
-            if(playerTwo->getNumber() == ball->getPlayer())
-            {
-                playerTwo->setStatus(playerOne->HAS_BALL);
-            }
-            else
-            {
-                playerTwo->setStatus(playerOne->TEAM_WITH_BALL);
-            }
-            playerOne->setStatus(playerOne->WITHOUT_BALL);
+            p->setStatus(p->OPP_IN_SQUARE);
+        }
+        else
+        {
+            p->setStatus(p->LOOSE_BALL);
         }
     }
     else
     {
-        for(int i = 0; i < 5; i++)
+        if(checkSquare(p, team) != -1)
         {
-            Player* playerOne = teamOne->getPlayer(i);
-            Player* playerTwo = teamTwo->getPlayer(i);
-
-            playerTwo->setStatus(playerOne->LOOSE_BALL);
-            playerOne->setStatus(playerOne->LOOSE_BALL);
+            p->setStatus(p->OPP_IN_SQUARE);
+        }
+        else
+        {
+            p->setStatus(p->WITHOUT_BALL);
         }
     }
+}
+
+int Match::checkSquare(Player *p, int team)
+{
+    if(team == 1)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            Player opp = *teamTwo->getPlayer(i);
+            if(opp.getPosX() == p->getPosX() && opp.getPosY() == p->getPosY())
+            {
+                return i;
+            }
+        }
+    }
+    else if(team == 2)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            Player opp = *teamOne->getPlayer(i);
+            if(opp.getPosX() == p->getPosX() && opp.getPosY() == p->getPosY())
+            {
+                return i;
+            }
+        }
+    }
+
+    return -1;
+}
+
+int Match::findPlayer(Player *p)
+{
+    int team = p->getTeam(), num = p->getNumber();
+    int checkTeam, checkNum;
+    for(int i = 0; i < playersToMove.size(); i++)
+    {
+        checkTeam = playersToMove[i]->getTeam();
+        checkNum = playersToMove[i]->getNumber();
+
+        if(team == checkTeam && num == checkNum)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 void Match::printer()
@@ -272,6 +372,6 @@ void Match::printer()
     for(int i = 0; i < 10; i++)
     {
         Player p = *playersToMove[i];
-        cout<<"NAME: " << p.getName() << " X: " << p.getPosX() << " Y: " << p.getPosY() << endl;
+        cout<<"NAME: " << p.getName() << " X: " << p.getPosX() << " Y: " << p.getPosY() << " STATUS: " << p.getStatus() << endl;
     }
 }

@@ -47,3 +47,9 @@ void Ball::setPlayer(int playerNum)
 {
     player = playerNum;
 }
+
+void Ball::drop()
+{
+    team = -1;
+    player = -1;
+}

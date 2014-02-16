@@ -15,6 +15,21 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     team = 0;
 }
 
+void Player::respawn()
+{
+    int ranPos = rand()%3 + 2;
+    if(team == 1)
+    {
+        setPosX(0);
+        setPosY(ranPos);
+    }
+    else if(team == 2)
+    {
+        setPosX(6);
+        setPosY(ranPos);
+    }
+}
+
 void Player::setRole(int role)
 {
     this->role = role;
@@ -259,4 +274,19 @@ int Player::getAgility()
 int Player::getNumber()
 {
     return number;
+}
+
+int Player::getAttack()
+{
+    return attack;
+}
+
+int Player::getJump()
+{
+    return jumping;
+}
+
+int Player::getStatus()
+{
+    return status;
 }
