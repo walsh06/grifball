@@ -51,6 +51,8 @@ public:
     void setMove(int move);
     void setTeam(int team);
 
+    int getRole();
+    int getPass();
     int getStatus();
     int getJump();
     int getAttack();

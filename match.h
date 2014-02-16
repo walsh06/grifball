@@ -37,6 +37,8 @@ private:
 
     int findPlayer(Player *p);
 
+    Player* getTeammate(Player* p);
+    void setMissPass(int x, int y);
     void printer();
 public:
     Match();
