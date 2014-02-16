@@ -20,6 +20,8 @@ public:
     int getPlayer();
     int getPosX();
     int getPosY();
+
+    void drop();
 };
 
 #endif // BALL_H

@@ -36,7 +36,7 @@ private:
 
 public:
     static const int MOVE_UP = 1, MOVE_DOWN = 2, MOVE_LEFT = 3, MOVE_RIGHT = 4, PASS = 5, ATTACK = 6, MOVE_TO_BALL = 7;
-    static const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3, OPP_IN_SQUARE = 4, LOOSE_BALL = 5;
+    static const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3, OPP_IN_SQUARE = 4, LOOSE_BALL = 5, DEAD = 6;
 
     Player(string name, int attack, int pass, int jump, int agility, int number);
 
@@ -51,6 +51,11 @@ public:
     void setMove(int move);
     void setTeam(int team);
 
+    int getRole();
+    int getPass();
+    int getStatus();
+    int getJump();
+    int getAttack();
     int getAgility();
     int getMove();
     int getPosX();
@@ -59,6 +64,8 @@ public:
     int getTeam();
     int getNumber();
     string getName();
+
+    void respawn();
 
 
 };

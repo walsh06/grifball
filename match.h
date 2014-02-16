@@ -27,11 +27,18 @@ private:
     void moveToward(Player *p);
 
     void setMoveOrder();
-    void setPlayerStatus();
+    void setPlayerStatus(Player* p);
+    void setAllStatus();
+
+    int checkSquare(Player* p, int team);
 
     void checkBall(Player *p);
     void updateBall(Player *p);
 
+    int findPlayer(Player *p);
+
+    Player* getTeammate(Player* p);
+    void setMissPass(int x, int y);
     void printer();
 public:
     Match();
