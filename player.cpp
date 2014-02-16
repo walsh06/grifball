@@ -1,18 +1,18 @@
 #include "player.h"
 #include <iostream>
 
-Player::Player(string name, int attack, int pass, int jump, int agility)
+Player::Player(string name, int attack, int pass, int jump, int agility, int number)
 {
     this->name = name;
     setAgility(agility);
     setAttack(attack);
     setJumping(jump);
     setPass(pass);
-
+    this->number = number;
     move = 0;
     srand( time(0));
-    status = HAS_BALL;
-    team = 1;
+    status = LOOSE_BALL;
+    team = 0;
 }
 
 void Player::setRole(int role)
@@ -24,6 +24,7 @@ void Player::setRole(int role)
         team_ball[0] = 75; team_ball[1] = 5; team_ball[2] = 10; team_ball[3] = 10;
         opp_ball[0] = 40; opp_ball[1] = 40; opp_ball[2] = 10; opp_ball[3] = 10;
         opp_in_square[0] = 40; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 40;
+        loose_ball[0] = 95; loose_ball[1] = 5;
     }
     else if(role == 2) //attacker
     {
@@ -31,6 +32,7 @@ void Player::setRole(int role)
         team_ball[0] = 80; team_ball[1] = 4; team_ball[2] = 8; team_ball[3] = 8;
         opp_ball[0] = 40; opp_ball[1] = 40; opp_ball[2] = 10; opp_ball[3] = 10;
         opp_in_square[0] = 5; opp_in_square[1] = 5; opp_in_square[2] = 5; opp_in_square[3] = 85;
+        loose_ball[0] = 95; loose_ball[1] = 5;
     }
     else if(role == 3) // defender
     {
@@ -38,6 +40,7 @@ void Player::setRole(int role)
         team_ball[0] = 60; team_ball[1] = 10; team_ball[2] = 15; team_ball[3] = 15;
         opp_ball[0] = 30; opp_ball[1] = 40; opp_ball[2] = 15; opp_ball[3] = 15;
         opp_in_square[0] = 10; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 70;
+        loose_ball[0] = 75; loose_ball[1] = 25;
     }
 }
 
@@ -104,7 +107,7 @@ void Player::setMove(int move)
 
 void Player::setPosX(int x)
 {
-    if(x >= 0 || x <= 6 )
+    if(x >= 0 && x <= 6 )
     {
         position[0] = x;
     }
@@ -112,10 +115,15 @@ void Player::setPosX(int x)
 
 void Player::setPosY(int y)
 {
-    if(y >= 0 || y <= 6 )
+    if(y >= 0 && y <= 6 )
     {
-        position[0] = y;
+        position[1] = y;
     }
+}
+
+void Player::setTeam(int team)
+{
+    this->team = team;
 }
 
 int Player::getPosX()
@@ -133,7 +141,7 @@ int Player::getAction()
     int n=rand()%100;
     int action = -1;
 
-    cout << "RANDOM: " << n << endl;
+    //cout << "RANDOM: " << n << endl;
     if(status == HAS_BALL)
     {
         if( n < with_ball[0])
@@ -214,6 +222,17 @@ int Player::getAction()
             action = ATTACK;
         }
     }
+    else if (status == LOOSE_BALL)
+    {
+        if( n < loose_ball[0])
+        {
+            action = MOVE_TO_BALL;
+        }
+        else if(n < loose_ball[0] + loose_ball[1])
+        {
+            action = MOVE_LEFT;
+        }
+    }
     return action;
 }
 
@@ -235,4 +254,9 @@ int Player::getMove()
 int Player::getAgility()
 {
     return agility;
+}
+
+int Player::getNumber()
+{
+    return number;
 }
