@@ -19,7 +19,7 @@ void Match::sim()
     setMoveOrder();
     //setAllStatus();
     //printer();
-    int numPlayers = playersToMove.size();
+    //int numPlayers = playersToMove.size();
     for(int i = 0; i < playersToMove.size(); i++)
     {
         Player* p = playersToMove[i];
@@ -98,12 +98,12 @@ void Match::attack(Player *p)
     if(n == 1)
     {
         oppTeam = 2;
-        opp = teamTwo->getPlayer(checkSquare(p, 1));
+        opp = teamTwo->getPlayer(checkSquare(p, n));
     }
     else if(n == 2)
     {
         oppTeam = 1;
-        opp = teamOne->getPlayer(checkSquare(p, 2));
+        opp = teamOne->getPlayer(checkSquare(p, n));
     }
     int attackRoll = (rand()%11) + p->getAttack();
     int dodgeRoll = (rand()%11) + opp->getJump();
@@ -453,14 +453,18 @@ void Match::checkBall(Player *p)
 
     if(py == y && px == x && ball->getTeam() == -1)
     {
-        ball->setPlayer(p->getNumber());
-        ball->setTeam(p->getTeam());
-        cout << "Picked up ball" << endl;
+        updateBall(p);
+        cout << p->getName() << " Picked up ball" << endl;
     }
 }
 
 void Match::updateBall(Player *p)
 {
+    if(ball->getTeam() == -1)
+    {
+        ball->setPlayer(p->getNumber());
+        ball->setTeam(p->getTeam());
+    }
     ball->setPosX(p->getPosX());
     ball->setPosY(p->getPosY());
 }
@@ -523,11 +527,11 @@ void Match::setPlayerStatus(Player* p)
         {
             if(checkSquare(p, team) != -1)
             {
-                p->setStatus(p->HAS_BALL);
+                p->setStatus(p->BALL_WITH_OPP);
             }
             else
             {
-                p->setStatus(p->BALL_WITH_OPP);
+                p->setStatus(p->HAS_BALL);
             }
         }
         else if(checkSquare(p, team) != -1)
@@ -587,7 +591,6 @@ int Match::checkSquare(Player *p, int team)
             }
         }
     }
-
     return -1;
 }
 

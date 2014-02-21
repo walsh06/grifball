@@ -180,7 +180,6 @@ int Player::getAction()
     int n=rand()%100;
     int action = -1;
 
-    //cout << "RANDOM: " << n << endl;
     if(status == HAS_BALL)
     {
         if( n < with_ball[0])
