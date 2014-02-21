@@ -4,7 +4,7 @@ Filehelper::Filehelper()
 {
 }
 
-Team* Filehelper::getTeamFromFile(string filename)
+vector<Player*> Filehelper::getTeamFromFile(string filename)
 {
     Team* team;
     vector<Player *> players;
@@ -38,6 +38,5 @@ Team* Filehelper::getTeamFromFile(string filename)
 
       myfile.close();
     }
-    team = new Team(players);
-    return team;
+    return players;
 }

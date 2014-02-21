@@ -49,7 +49,7 @@ void Player::setRole(int role)
      *ball_with_opp{move_towards_goal, move_down, move_left, move_right, pass}
      **/
     this->role = role;
-    if(role == 1) //scorer
+    if(role == SCORER)
     {
         with_ball[0] = 70; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 15;
         team_ball[0] = 75; team_ball[1] = 5; team_ball[2] = 10; team_ball[3] = 10;
@@ -58,7 +58,7 @@ void Player::setRole(int role)
         loose_ball[0] = 95; loose_ball[1] = 5;
         ball_with_opp[0] = 50; ball_with_opp[1] = 5; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 15;
     }
-    else if(role == 2) //attacker
+    else if(role == ATTACKER)
     {
         with_ball[0] = 60; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 25;
         team_ball[0] = 80; team_ball[1] = 4; team_ball[2] = 8; team_ball[3] = 8;
@@ -67,7 +67,7 @@ void Player::setRole(int role)
         loose_ball[0] = 95; loose_ball[1] = 5;
         ball_with_opp[0] = 40; ball_with_opp[1] = 10; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 20;
     }
-    else if(role == 3) // defender
+    else if(role == DEFENDER)
     {
         with_ball[0] = 40; with_ball[1] = 4; with_ball[2] = 8; with_ball[3] = 8; with_ball[4] = 40;
         team_ball[0] = 60; team_ball[1] = 10; team_ball[2] = 15; team_ball[3] = 15;

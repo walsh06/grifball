@@ -14,7 +14,7 @@ class Filehelper
 {
 public:
     Filehelper();
-    static Team * getTeamFromFile(string filename);
+    static vector<Player *> getTeamFromFile(string filename);
 };
 
 #endif // FILEHELPER_H
