@@ -6,11 +6,12 @@
 #include <string>
 
 /*
- *with_ball {move_up, move_down, move_left, move_right, pass}
+ *with_ball {move_towards_goal, move_down, move_left, move_right, pass}
  *team_ball {move_up, move_down, move_left, move_right}
- *opp_ball {move_up, move_down, move_left, move_right}
+ *opp_ball {move_towards_ball, move_down, move_left, move_right}
  *opp_in_square {move_down, move_left, move_right, kill}
- *loose_ball{move_toward, move_back}
+ *loose_ball{move_toward_ball, move_back}
+ *ball_with_opp{move_towards_goal, move_down, move_left, move_right, pass}
  *
  *POS LAYOUT
  *
@@ -26,6 +27,7 @@ private:
     int opp_ball[4];
     int opp_in_square[4];
     int loose_ball[2];
+    int ball_with_opp[5];
     int status;
     int position[2];
     int team;
@@ -35,8 +37,8 @@ private:
     string name;
 
 public:
-    static const int MOVE_UP = 1, MOVE_DOWN = 2, MOVE_LEFT = 3, MOVE_RIGHT = 4, PASS = 5, ATTACK = 6, MOVE_TO_BALL = 7;
-    static const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3, OPP_IN_SQUARE = 4, LOOSE_BALL = 5, DEAD = 6;
+    static const int MOVE_UP = 1, MOVE_DOWN = 2, MOVE_LEFT = 3, MOVE_RIGHT = 4, PASS = 5, ATTACK = 6, MOVE_TO_BALL = 7, MOVE_TO_GOAL = 8;
+    static const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3, OPP_IN_SQUARE = 4, LOOSE_BALL = 5, DEAD = 6, BALL_WITH_OPP = 7;
 
     Player(string name, int attack, int pass, int jump, int agility, int number);
 
@@ -66,8 +68,7 @@ public:
     string getName();
 
     void respawn();
-
-
+    void kill();
 };
 
 #endif // PLAYER_H
