@@ -11,6 +11,7 @@ private:
 
 public:
     Team(int);
+    Team(vector<Player *>);
     Player* getPlayer(int playerNum);
     void addPlayer(Player *p);
 };

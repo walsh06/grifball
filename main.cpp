@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <iostream>
 #include "match.h"
+#include "filehelper.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Match m;
+    Match m("blues", "reds");
 
     m.sim();
     return a.exec();

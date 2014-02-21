@@ -3,11 +3,14 @@
 #include "player.h"
 #include "team.h"
 #include "ball.h"
+#include "filehelper.h"
+
 #include <iostream>
 #include <vector>
 #include <time.h>
 #include <ctime>
 #include <cstdlib>
+
 
 using namespace std;
 
@@ -49,7 +52,7 @@ private:
     void printer();
 
 public:
-    Match();
+    Match(string teamOneName, string teamTwoName);
     void sim();
 };
 

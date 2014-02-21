@@ -1,9 +1,9 @@
 #include "match.h"
 
-Match::Match()
+Match::Match(string teamOneName, string teamTwoName)
 {
-    teamOne = new Team(1);
-    teamTwo = new Team(2);
+    teamOne = Filehelper::getTeamFromFile(teamOneName);
+    teamTwo = Filehelper::getTeamFromFile(teamTwoName);
     ball = new Ball();
     srand( time(0));
     roundOver = false;

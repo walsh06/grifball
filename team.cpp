@@ -54,6 +54,12 @@ Team::Team(int n)
 
 }
 
+Team::Team(vector<Player *> players)
+{
+    this->players = players;
+}
+
+
 Player* Team::getPlayer(int playerNum)
 {
     return players[playerNum];
