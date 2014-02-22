@@ -12,3 +12,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+MatchScreen* MainWindow::getMatchScreen()
+{
+    return ui->matchWidget;
+}
+

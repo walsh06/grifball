@@ -18,13 +18,18 @@ SOURCES += main.cpp\
     team.cpp \
     match.cpp \
     ball.cpp \
-    filehelper.cpp
+    filehelper.cpp \
+    matchscreen.cpp
 
 HEADERS  += mainwindow.h \
     player.h \
     team.h \
     match.h \
     ball.h \
-    filehelper.h
+    filehelper.h \
+    matchscreen.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    matchscreen.ui
+
+QMAKE_CXXFLAGS += -std=c++11

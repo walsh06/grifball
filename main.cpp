@@ -14,6 +14,6 @@ int main(int argc, char *argv[])
 
     Match m("blues", "reds");
 
-    m.sim();
+    m.sim(w.getMatchScreen());
     return a.exec();
 }
