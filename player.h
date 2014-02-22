@@ -4,6 +4,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <sstream>
+#include <vector>
 
 /*
  *with_ball {move_towards_goal, move_down, move_left, move_right, pass}
@@ -22,18 +24,23 @@ class Player
 {
 private:
     int attack, pass, agility, jumping;
+
     int with_ball[5];
     int team_ball[4];
     int opp_ball[4];
     int opp_in_square[4];
     int loose_ball[2];
     int ball_with_opp[5];
+
     int status;
     int position[2];
     int team;
     int role;
     int move;
     int number;
+
+    int kills, deaths, scores;
+
     string name;
 
 public:
@@ -66,6 +73,15 @@ public:
     int getTeam();
     int getNumber();
     string getName();
+
+    void addKill();
+    void addDeath();
+    void addScore();
+    void resetKill();
+    void resetDeath();
+    void resetScore();
+
+    vector<string> getStatString();
 
     void respawn();
     void kill();

@@ -13,6 +13,7 @@ Match::Match(string teamOneName, string teamTwoName)
 void Match::sim(MatchScreen* screen)
 {
     this->screen = screen;
+    resetRound();
     int timer;
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
@@ -67,6 +68,7 @@ void Match::sim(MatchScreen* screen)
     cout << "BALL TEAM: " << ball->getTeam() << " PLAYER: " << ball->getPlayer() << endl;
     //setAllStatus();
     //printer();
+    screen->updateStatScreen(teamOne, teamTwo);
     QTime dieTime= QTime::currentTime().addSecs(1);
         while( QTime::currentTime() < dieTime )
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
@@ -80,9 +82,8 @@ void Match::sim(MatchScreen* screen)
     else
     {
         cout << "DRAW" << endl;
-
     }
-
+    cout << teamOne->getScore() << "-" << teamTwo->getScore() << endl;
 }
 
 //===================================
@@ -97,6 +98,16 @@ void Match::checkWin(Player *p)
         cout << " WOOOOOOOOOOOOOOOOOOOOOOO!!" << endl;
         roundOver = true;
         winningTeam = p->getTeam();
+        p->addScore();
+
+        if(p->getTeam() == 1)
+        {
+            teamOne->addScore();
+        }
+        else if(p->getTeam() == 2)
+        {
+            teamTwo->addScore();
+        }
     }
 }
 
@@ -638,4 +649,22 @@ void Match::printer()
         Player p = *playersToMove[i];
         cout<<"NAME: " << p.getName() << " X: " << p.getPosX() << " Y: " << p.getPosY() << " STATUS: " << p.getStatus() << endl;
     }
+}
+
+void Match::resetRound()
+{
+    teamOne->startSpawn();
+    teamTwo->startSpawn();
+    ball->reset();
+    roundOver = false;
+}
+
+int Match::getTeamOneScore()
+{
+    teamOne->getScore();
+}
+
+int Match::getTeamTwoScore()
+{
+    teamTwo->getScore();
 }

@@ -51,7 +51,6 @@ Team::Team(int n)
         players[3]->setTeam(2);
         players[4]->setTeam(2);
     }
-
 }
 
 Team::Team(vector<Player *> players, int teamNum)
@@ -67,6 +66,7 @@ Team::Team(vector<Player *> players, int teamNum)
     setPlayerRole(4, Player::ATTACKER);
     setPlayerRole(5, Player::DEFENDER);
 
+    resetScore();
 }
 
 void Team::setPlayerRole(int playerNum, int role)
@@ -125,4 +125,19 @@ void Team::addPlayer(Player *p)
     {
         players.push_back(p);
     }
+}
+
+int Team::getScore()
+{
+    return score;
+}
+
+void Team::addScore()
+{
+    score++;
+}
+
+void Team::resetScore()
+{
+    score = 0;
 }

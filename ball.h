@@ -22,6 +22,7 @@ public:
     int getPosY();
 
     void drop();
+    void reset();
 };
 
 #endif // BALL_H

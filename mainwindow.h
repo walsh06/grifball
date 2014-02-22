@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "matchscreen.h"
+#include "match.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +21,12 @@ public:
 
 private slots:
 
+    void on_startButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    Match *match;
 };
 
 #endif // MAINWINDOW_H

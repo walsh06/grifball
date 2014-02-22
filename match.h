@@ -63,9 +63,14 @@ private:
     void setMissPass(int x, int y);
     void printer();
 
+    void resetRound();
+
 public:
     Match(string teamOneName, string teamTwoName);
     void sim(MatchScreen* screen);
+
+    int getTeamOneScore();
+    int getTeamTwoScore();
 };
 
 #endif // MATCH_H

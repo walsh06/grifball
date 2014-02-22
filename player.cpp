@@ -13,6 +13,10 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     srand( time(0));
     status = LOOSE_BALL;
     team = 0;
+
+    resetKill();
+    resetDeath();
+    resetScore();
 }
 
 void Player::kill()
@@ -340,4 +344,48 @@ int Player::getStatus()
 int Player::getRole()
 {
     return role;
+}
+
+void Player::addKill()
+{
+    kills++;
+}
+
+void Player::addDeath()
+{
+    deaths++;
+}
+
+void Player::addScore()
+{
+    scores++;
+}
+
+void Player::resetKill()
+{
+    kills = 0;
+}
+
+void Player::resetDeath()
+{
+    deaths = 0;
+}
+
+void Player::resetScore()
+{
+    scores = 0;
+}
+
+vector<string> Player::getStatString()
+{
+    stringstream killStream, deathStream, scoreStream;
+    killStream << kills;
+    deathStream << deaths;
+    scoreStream << scores;
+    vector<string> statLine;
+    statLine.push_back(name);
+    statLine.push_back(killStream.str());
+    statLine.push_back(deathStream.str());
+    statLine.push_back(scoreStream.str());
+    return statLine;
 }

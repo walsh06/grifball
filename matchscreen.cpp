@@ -1,11 +1,25 @@
 #include "matchscreen.h"
 #include "ui_matchscreen.h"
 
+#include <iostream>
 MatchScreen::MatchScreen(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MatchScreen)
 {
     ui->setupUi(this);
+
+    statsOne[0][0] = ui->one_one;statsOne[1][0] = ui->one_one_kills;statsOne[2][0] = ui->one_one_deaths;statsOne[3][0] = ui->one_one_scores;
+    statsOne[0][1] = ui->one_two;statsOne[1][1] = ui->one_two_kills;statsOne[2][1] = ui->one_two_deaths;statsOne[3][1] = ui->one_two_scores;
+    statsOne[0][2] = ui->one_three;statsOne[1][2] = ui->one_three_kills;statsOne[2][2] = ui->one_three_deaths;statsOne[3][2] = ui->one_three_scores;
+    statsOne[0][3] = ui->one_four;statsOne[1][3] = ui->one_four_kills;statsOne[2][3] = ui->one_four_deaths;statsOne[3][3] = ui->one_four_scores;
+    statsOne[0][4] = ui->one_five;statsOne[1][4] = ui->one_five_kills;statsOne[2][4] = ui->one_five_deaths;statsOne[3][4] = ui->one_five_scores;
+
+    statsTwo[0][0] = ui->two_one;statsTwo[1][0] = ui->two_one_kills;statsTwo[2][0] = ui->two_one_deaths;statsTwo[3][0] = ui->two_one_scores;
+    statsTwo[0][1] = ui->two_two;statsTwo[1][1] = ui->two_two_kills;statsTwo[2][1] = ui->two_two_deaths;statsTwo[3][1] = ui->two_two_scores;
+    statsTwo[0][2] = ui->two_three;statsTwo[1][2] = ui->two_three_kills;statsTwo[2][2] = ui->two_three_deaths;statsTwo[3][2] = ui->two_three_scores;
+    statsTwo[0][3] = ui->two_four;statsTwo[1][3] = ui->two_four_kills;statsTwo[2][3] = ui->two_four_deaths;statsTwo[3][3] = ui->two_four_scores;
+    statsTwo[0][4] = ui->two_five;statsTwo[1][4] = ui->two_five_kills;statsTwo[2][4] = ui->two_five_deaths;statsTwo[3][4] = ui->two_five_scores;
+
 }
 
 MatchScreen::~MatchScreen()
@@ -29,7 +43,8 @@ void MatchScreen::updateKillFeed(Player* killer, Player* target)
     stringstream killMessage;
 
     killMessage << killer->getName() << " kills " << target->getName();
-
+    killer->addKill();
+    target->addDeath();
     ui->killfeed->append(QString::fromStdString(killMessage.str()));
 }
 
@@ -80,7 +95,6 @@ void MatchScreen::updateKill(Player* killer, Player* target)
     stringstream killMessage;
 
     killMessage << killer->getName() << " kills " << target->getName();
-
     ui->mainOutput->setText(QString::fromStdString(killMessage.str()));
 }
 
@@ -100,4 +114,26 @@ void MatchScreen::updatePickup(Player *p)
     pickMessage << p->getName() << " picks up the ball";
 
     ui->mainOutput->setText(QString::fromStdString(pickMessage.str()));
+}
+
+void MatchScreen::updateStatScreen(Team* teamOne, Team* teamTwo)
+{
+    vector<string> statLine;
+    for(int i = 0; i < 5; i++)
+    {
+        statLine = teamOne->getPlayer(i)->getStatString();
+        statsOne[0][i]->setText(QString::fromStdString(statLine[0])) ;
+        statsOne[1][i]->setText(QString::fromStdString(statLine[1])) ;
+        statsOne[2][i]->setText(QString::fromStdString(statLine[2])) ;
+        statsOne[3][i]->setText(QString::fromStdString(statLine[3])) ;
+    }
+
+    for(int i = 0; i < 5; i++)
+    {
+        statLine = teamTwo->getPlayer(i)->getStatString();
+        statsTwo[0][i]->setText(QString::fromStdString(statLine[0])) ;
+        statsTwo[1][i]->setText(QString::fromStdString(statLine[1])) ;
+        statsTwo[2][i]->setText(QString::fromStdString(statLine[2])) ;
+        statsTwo[3][i]->setText(QString::fromStdString(statLine[3])) ;
+    }
 }

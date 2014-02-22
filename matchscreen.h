@@ -2,11 +2,13 @@
 #define MATCHSCREEN_H
 
 #include <QWidget>
+#include <QLabel>
 #include <string>
 #include <sstream>
 #include <iostream>
 
 #include "player.h"
+#include "team.h"
 
 using namespace std;
 
@@ -31,9 +33,12 @@ public:
     void updateDodge(Player* attacker, Player* target);
     void updatePickup(Player* p);
 
+    void updateStatScreen(Team* teamOne, Team* teamTwo);
+
 private:
     Ui::MatchScreen *ui;
 
+    QLabel* statsOne[5][5], *statsTwo[5][5];
     void updateOutput(string message);
 };
 

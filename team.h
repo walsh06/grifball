@@ -8,9 +8,9 @@ class Team
 {
 private:
     vector <Player*> players;
+    int score;
 
     void setTeam(int team);
-    void startSpawn();
 
 public:
     Team(int);
@@ -18,7 +18,11 @@ public:
     Player* getPlayer(int playerNum);
     void addPlayer(Player *p);
 
+    int getScore();
+    void addScore();
+    void resetScore();
     void setPlayerRole(int playerNum, int role);
+    void startSpawn();
 };
 
 #endif // TEAM_H
