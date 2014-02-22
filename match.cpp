@@ -2,8 +2,8 @@
 
 Match::Match(string teamOneName, string teamTwoName)
 {
-    teamOne = Filehelper::getTeamFromFile(teamOneName);
-    teamTwo = Filehelper::getTeamFromFile(teamTwoName);
+    teamOne = new Team(Filehelper::getTeamFromFile(teamOneName), 1);
+    teamTwo = new Team(Filehelper::getTeamFromFile(teamTwoName), 2);
     ball = new Ball();
     srand( time(0));
     roundOver = false;
@@ -67,7 +67,15 @@ void Match::sim()
     printer();
     }
     cout << "GAME OVER TIME: " << timer << endl;
-    cout << "WINNER: Team" << winningTeam << endl;
+    if(winningTeam == 1 || winningTeam == 2)
+    {
+        cout << "WINNER: Team " << winningTeam << endl;
+    }
+    else
+    {
+        cout << "DRAW" << endl;
+
+    }
 
 }
 
