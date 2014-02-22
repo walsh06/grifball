@@ -13,17 +13,24 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="mainOutput">
+  <widget class="QTextBrowser" name="killfeed">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>190</y>
-     <width>351</width>
-     <height>91</height>
+     <y>30</y>
+     <width>151</width>
+     <height>81</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Game Starts</string>
+  </widget>
+  <widget class="QTextBrowser" name="mainOutput">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>201</y>
+     <width>341</width>
+     <height>41</height>
+    </rect>
    </property>
   </widget>
  </widget>
