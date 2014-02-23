@@ -18,63 +18,59 @@ void Match::sim(MatchScreen* screen)
 
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
+        screen->tick(timer);
         cout << teamOne->getPlayer(0)->getRole()<< endl;
         screen->resetKillFeed();
         cout<< "TIME: " << timer << endl;
-    setMoveOrder();
-    //setAllStatus();
-    //printer();
-    //int numPlayers = playersToMove.size();
-    for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
-    {
-        Player* p = playersToMove[i];
-        checkBall(p);
-        setPlayerStatus(p);
-        int act = p->getAction();
+        setMoveOrder();
+        for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
+        {
+            Player* p = playersToMove[i];
+            checkBall(p);
+            setPlayerStatus(p);
+            int act = p->getAction();
 
-        //cout << p->getName();
+            //cout << p->getName();
 
-        if(act == p->MOVE_UP)
-        {
-            moveUp(p);
+            if(act == p->MOVE_UP)
+            {
+                moveUp(p);
+            }
+            else if(act == p->MOVE_DOWN)
+            {
+                moveBack(p);
+            }
+            else if(act == p->MOVE_LEFT)
+            {
+                moveLeft(p);
+            }
+            else if(act == p->MOVE_RIGHT)
+            {
+                moveRight(p);
+            }
+            else if(act == p->PASS)
+            {
+                pass(p);
+            }
+            else if(act == p->MOVE_TO_BALL)
+            {
+                moveTowardBall(p);
+            }
+            else if(act == p->ATTACK)
+            {
+                attack(p);
+            }
+            else if(act == p->MOVE_TO_GOAL)
+            {
+                moveTowardGoal(p);
+            }
         }
-        else if(act == p->MOVE_DOWN)
-        {
-            moveBack(p);
-        }
-        else if(act == p->MOVE_LEFT)
-        {
-            moveLeft(p);
-        }
-        else if(act == p->MOVE_RIGHT)
-        {
-            moveRight(p);
-        }
-        else if(act == p->PASS)
-        {
-            pass(p);
-        }
-        else if(act == p->MOVE_TO_BALL)
-        {
-            moveTowardBall(p);
-        }
-        else if(act == p->ATTACK)
-        {
-            attack(p);
-        }
-        else if(act == p->MOVE_TO_GOAL)
-        {
-            moveTowardGoal(p);
-        }
-    }
     cout << "BALL TEAM: " << ball->getTeam() << " PLAYER: " << ball->getPlayer() << endl;
-    //setAllStatus();
-    //printer();
     screen->updateStatScreen(teamOne, teamTwo);
+
     QTime dieTime= QTime::currentTime().addSecs(1);
         while( QTime::currentTime() < dieTime )
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     cout << "GAME OVER TIME: " << timer << endl;
     if(winningTeam == 1 || winningTeam == 2)

@@ -137,3 +137,8 @@ void MatchScreen::updateStatScreen(Team* teamOne, Team* teamTwo)
         statsTwo[3][i]->setText(QString::fromStdString(statLine[3])) ;
     }
 }
+
+void MatchScreen::tick(int time)
+{
+    ui->clock->display(time);
+}
