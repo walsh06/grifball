@@ -58,4 +58,5 @@ void Ball::reset()
 {
     setPosX(3);
     setPosY(3);
+    drop();
 }

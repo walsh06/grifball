@@ -376,6 +376,25 @@ void Player::resetScore()
     scores = 0;
 }
 
+string Player::getRoleString()
+{
+    string roleString = "";
+    if(role == ATTACKER)
+    {
+        roleString = "Attacker";
+    }
+    else if(role == DEFENDER)
+    {
+        roleString = "Defender";
+    }
+    else if(role == SCORER)
+    {
+        roleString = "Scorer";
+    }
+
+    return roleString;
+}
+
 vector<string> Player::getStatString()
 {
     stringstream killStream, deathStream, scoreStream;

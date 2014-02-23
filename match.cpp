@@ -15,6 +15,7 @@ void Match::sim(MatchScreen* screen)
     this->screen = screen;
     resetRound();
     int timer;
+    cout << teamOne->getPlayer(0)->getRoleString() << endl;
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
         screen->resetKillFeed();
@@ -23,14 +24,14 @@ void Match::sim(MatchScreen* screen)
     //setAllStatus();
     //printer();
     //int numPlayers = playersToMove.size();
-    for(int i = 0; i < playersToMove.size(); i++)
+    for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
     {
         Player* p = playersToMove[i];
         checkBall(p);
         setPlayerStatus(p);
         int act = p->getAction();
 
-        cout << p->getName();
+        //cout << p->getName();
 
         if(act == p->MOVE_UP)
         {
@@ -95,7 +96,6 @@ void Match::checkWin(Player *p)
     int team = p->getTeam();
     if(ball->getPlayer() == p->getNumber() && p->getPosY() == 3 && (((p->getPosX() == 6 && team == 1) || (team == 2 && p->getPosX() == 0))))
     {
-        cout << " WOOOOOOOOOOOOOOOOOOOOOOO!!" << endl;
         roundOver = true;
         winningTeam = p->getTeam();
         p->addScore();
@@ -117,7 +117,7 @@ void Match::checkWin(Player *p)
 
 void Match::attack(Player *p)
 {
-    cout << " Attacks";
+    //cout << " Attacks";
     int n = p->getTeam(), oppTeam;
     Player *opp;
     if(n == 1)
@@ -135,7 +135,7 @@ void Match::attack(Player *p)
 
     if(attackRoll > dodgeRoll)
     {
-        cout << " and Kills " << opp->getName() << endl;
+        //cout << " and Kills " << opp->getName() << endl;
         opp->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(opp));
         screen->updateKillFeed(p, opp);
@@ -154,7 +154,7 @@ void Match::attack(Player *p)
             screen->updateDodge(p, opp);
             ball->drop();
         }
-        cout << " but misses " << opp->getName() << endl;
+        //cout << " but misses " << opp->getName() << endl;
     }
 }
 
@@ -177,7 +177,7 @@ int Match::findPlayer(Player *p)
 
 void Match::dodge(Player *p)
 {
-    cout << " Jumps";
+    //cout << " Jumps";
     int team = p->getTeam(), oppTeam;
     Player *opp;
     if(team == 1)
@@ -195,7 +195,7 @@ void Match::dodge(Player *p)
 
     if(attackRoll > dodgeRoll)
     {
-        cout << " but is killed by Kills " << opp->getName() << endl;
+        //cout << " but is killed by Kills " << opp->getName() << endl;
         p->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(p));
         ball->drop();
@@ -205,7 +205,7 @@ void Match::dodge(Player *p)
     else
     {
         screen->updateDodge(opp, p);
-        cout << " and gets past" << opp->getName() << endl;
+        //cout << " and gets past" << opp->getName() << endl;
         if(team == 1)
         {
             p->setPosX(p->getPosX() + 1);
@@ -227,13 +227,13 @@ void Match::dodge(Player *p)
 //======================================
 void Match::pass(Player *p)
 {
-    cout << " Pass ";
+    //cout << " Pass ";
     int passRoll =(rand()%11 + 1) + p->getPass();
     Player* target = getTeammate(p);
 
     if(passRoll > 11)
     {
-        cout << "To " << target->getName() << endl;
+        //cout << "To " << target->getName() << endl;
 
         screen->updatePass(p, target);
         updateBall(target);
@@ -245,7 +245,7 @@ void Match::pass(Player *p)
         stringstream message ;
         message << p->getName() << " missed with a bad pass to " << target->getName();
         screen->updateMissPass(p, target);
-        cout << "Misses pass to " << target->getName() << " , Loose Ball!!" << endl;
+        //cout << "Misses pass to " << target->getName() << " , Loose Ball!!" << endl;
         ball->drop();
         setMissPass(target->getPosX(), target->getPosY());
         setAllStatus();
@@ -336,7 +336,7 @@ void Match::setMissPass(int x, int y)
 //================================
 void Match::moveUp(Player *p)
 {
-    cout << " Moves Forward" << endl;
+   // cout << " Moves Forward" << endl;
 
     if(p->getStatus() == p->BALL_WITH_OPP)
     {
@@ -366,7 +366,7 @@ void Match::moveUp(Player *p)
 
 void Match::moveBack(Player *p)
 {
-    cout << " Moves Backward" << endl;
+    //cout << " Moves Backward" << endl;
 
     int team = p->getTeam();
 
@@ -388,7 +388,7 @@ void Match::moveBack(Player *p)
 
 void Match::moveLeft(Player *p)
 {
-    cout << " Moves Left" << endl;
+    //cout << " Moves Left" << endl;
 
     int team = p->getTeam();
 
@@ -411,7 +411,7 @@ void Match::moveLeft(Player *p)
 
 void Match::moveRight(Player *p)
 {
-    cout << " Moves Right" << endl;
+    //cout << " Moves Right" << endl;
 
     int team = p->getTeam();
 
@@ -667,4 +667,14 @@ int Match::getTeamOneScore()
 int Match::getTeamTwoScore()
 {
     teamTwo->getScore();
+}
+
+Team* Match::getTeamOne()
+{
+    return teamOne;
+}
+
+Team* Match::getTeamTwo()
+{
+    return teamTwo;
 }

@@ -69,6 +69,8 @@ public:
     Match(string teamOneName, string teamTwoName);
     void sim(MatchScreen* screen);
 
+    Team* getTeamOne();
+    Team* getTeamTwo();
     int getTeamOneScore();
     int getTeamTwoScore();
 };

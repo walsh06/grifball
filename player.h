@@ -60,6 +60,7 @@ public:
     void setMove(int move);
     void setTeam(int team);
 
+    string getRoleString();
     int getRole();
     int getPass();
     int getStatus();

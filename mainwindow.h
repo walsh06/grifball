@@ -23,8 +23,19 @@ private slots:
 
     void on_startButton_clicked();
 
+    void on_roleOne_currentIndexChanged(int index);
+
+    void on_roleTwo_currentIndexChanged(int index);
+
+    void on_roleThree_currentIndexChanged(int index);
+
+    void on_roleFour_currentIndexChanged(int index);
+
+    void on_roleFive_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
+    void initTacticScreen();
 
     Match *match;
 };
