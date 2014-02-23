@@ -118,7 +118,12 @@ void Match::checkWin(Player *p)
 
 void Match::attack(Player *p)
 {
+<<<<<<< HEAD
     //cout << " Attacks";
+=======
+    int randRating = Player::maxRating + 1;
+    cout << " Attacks";
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     int n = p->getTeam(), oppTeam;
     Player *opp;
     if(n == 1)
@@ -131,8 +136,8 @@ void Match::attack(Player *p)
         oppTeam = 1;
         opp = teamOne->getPlayer(checkSquare(p, n));
     }
-    int attackRoll = (rand()%11) + p->getAttack();
-    int dodgeRoll = (rand()%11) + opp->getJump();
+    int attackRoll = (rand()%randRating) + p->getAttack();
+    int dodgeRoll = (rand()%randRating) + opp->getJump();
 
     if(attackRoll > dodgeRoll)
     {
@@ -178,7 +183,12 @@ int Match::findPlayer(Player *p)
 
 void Match::dodge(Player *p)
 {
+<<<<<<< HEAD
     //cout << " Jumps";
+=======
+    int randRating = Player::maxRating + 1;
+    cout << " Jumps";
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     int team = p->getTeam(), oppTeam;
     Player *opp;
     if(team == 1)
@@ -191,8 +201,8 @@ void Match::dodge(Player *p)
         oppTeam = 1;
         opp = teamOne->getPlayer(checkSquare(p, 2));
     }
-    int attackRoll = (rand()%11) + opp->getAttack();
-    int dodgeRoll = (rand()%11) + p->getJump();
+    int attackRoll = (rand()%randRating) + opp->getAttack();
+    int dodgeRoll = (rand()%randRating) + p->getJump();
 
     if(attackRoll > dodgeRoll)
     {
@@ -228,11 +238,17 @@ void Match::dodge(Player *p)
 //======================================
 void Match::pass(Player *p)
 {
+<<<<<<< HEAD
     //cout << " Pass ";
     int passRoll =(rand()%11 + 1) + p->getPass();
+=======
+    int randRating = Player::maxRating + 1;
+    cout << " Pass ";
+    int passRoll =(rand()%randRating + 1) + p->getPass();
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     Player* target = getTeammate(p);
 
-    if(passRoll > 11)
+    if(passRoll > 21)
     {
         //cout << "To " << target->getName() << endl;
 
