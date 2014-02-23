@@ -80,9 +80,9 @@ void Player::setRole(int role)
 
 void Player::setAttack(int attack)
 {
-    if(attack > 10)
+    if(attack > 20)
     {
-        this->attack = 10;
+        this->attack = 20;
     }
     else
     {
@@ -92,9 +92,9 @@ void Player::setAttack(int attack)
 
 void Player::setAgility(int agility)
 {
-    if(agility > 10)
+    if(agility > 20)
     {
-        this->agility = 10;
+        this->agility = 20;
     }
     else
     {
@@ -104,9 +104,9 @@ void Player::setAgility(int agility)
 
 void Player::setPass(int pass)
 {
-    if(pass > 10)
+    if(pass > 20)
     {
-        this->pass = 10;
+        this->pass = 20;
     }
     else
     {
@@ -116,9 +116,9 @@ void Player::setPass(int pass)
 
 void Player::setJumping(int jumping)
 {
-    if(jumping > 10)
+    if(jumping > 20)
     {
-        this->jumping = 10;
+        this->jumping = 20;
     }
     else
     {

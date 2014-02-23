@@ -113,8 +113,8 @@ void Match::attack(Player *p)
         oppTeam = 1;
         opp = teamOne->getPlayer(checkSquare(p, n));
     }
-    int attackRoll = (rand()%11) + p->getAttack();
-    int dodgeRoll = (rand()%11) + opp->getJump();
+    int attackRoll = (rand()%21) + p->getAttack();
+    int dodgeRoll = (rand()%21) + opp->getJump();
 
     if(attackRoll > dodgeRoll)
     {
@@ -161,8 +161,8 @@ void Match::dodge(Player *p)
         oppTeam = 1;
         opp = teamOne->getPlayer(checkSquare(p, 2));
     }
-    int attackRoll = (rand()%11) + opp->getAttack();
-    int dodgeRoll = (rand()%11) + p->getJump();
+    int attackRoll = (rand()%21) + opp->getAttack();
+    int dodgeRoll = (rand()%21) + p->getJump();
 
     if(attackRoll > dodgeRoll)
     {
@@ -196,10 +196,10 @@ void Match::dodge(Player *p)
 void Match::pass(Player *p)
 {
     cout << " Pass ";
-    int passRoll =(rand()%11 + 1) + p->getPass();
+    int passRoll =(rand()%21 + 1) + p->getPass();
     Player* target = getTeammate(p);
 
-    if(passRoll > 11)
+    if(passRoll > 21)
     {
         cout << "To " << target->getName() << endl;
         updateBall(target);
