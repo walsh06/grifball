@@ -33,10 +33,17 @@ private slots:
 
     void on_roleFive_currentIndexChanged(int index);
 
+    void on_player_box_currentIndexChanged(int index);
+
+    void on_sub_box_currentIndexChanged(int index);
+
+    void on_sub_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     void initTacticScreen();
 
+    int playerIndex, subIndex;
     Match *match;
 };
 

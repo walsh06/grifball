@@ -13,7 +13,7 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     srand( time(0));
     status = LOOSE_BALL;
     team = 0;
-
+    setRole(ATTACKER);
     resetKill();
     resetDeath();
     resetScore();

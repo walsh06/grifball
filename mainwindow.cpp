@@ -56,12 +56,23 @@ void MainWindow::initTacticScreen()
     ui->fourName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(3)->getName()));
     ui->fiveName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(4)->getName()));
 
-    ui->roleOne->setCurrentIndex(Player::ATTACKER -1);
-    ui->roleTwo->setCurrentIndex(Player::SCORER -1);
-    ui->roleThree->setCurrentIndex(Player::SCORER -1);
-    ui->roleFour->setCurrentIndex(Player::ATTACKER -1);
-    ui->roleFive->setCurrentIndex(Player::DEFENDER -1);
+    ui->roleOne->setCurrentIndex(match->getTeamOne()->getPlayer(0)->getRole() - 1);
+    ui->roleTwo->setCurrentIndex(match->getTeamOne()->getPlayer(1)->getRole() - 1);
+    ui->roleThree->setCurrentIndex(match->getTeamOne()->getPlayer(2)->getRole() - 1);
+    ui->roleFour->setCurrentIndex(match->getTeamOne()->getPlayer(3)->getRole() - 1);
+    ui->roleFive->setCurrentIndex(match->getTeamOne()->getPlayer(4)->getRole() - 1);
 
+    ui->sub_box->clear();
+    ui->player_box->clear();
+    int n = match->getTeamOne()->getNumSubs();
+    for(int i = 0; i < n; i++)
+    {
+        ui->sub_box->addItem(QString::fromStdString(match->getTeamOne()->getSub(i)->getName()));
+    }
+    for(int i = 0; i < 5; i++)
+    {
+        ui->player_box->addItem(QString::fromStdString(match->getTeamOne()->getPlayer(i)->getName()));
+    }
 }
 
 //========================
@@ -105,4 +116,20 @@ void MainWindow::on_roleFive_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(4)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+}
+
+void MainWindow::on_player_box_currentIndexChanged(int index)
+{
+    playerIndex = index;
+}
+
+void MainWindow::on_sub_box_currentIndexChanged(int index)
+{
+    subIndex = index;
+}
+
+void MainWindow::on_sub_button_clicked()
+{
+    match->getTeamOne()->makeSub(playerIndex, subIndex);
+    initTacticScreen();
 }

@@ -55,18 +55,18 @@ Team::Team(int n)
 
 Team::Team(vector<Player *> players, int teamNum)
 {
-    this->players = players;
+    this->squad = players;
+    initTeam();
     setTeam(teamNum);
-
     startSpawn();
 
-    setPlayerRole(1, Player::ATTACKER);
-    setPlayerRole(2, Player::SCORER);
-    setPlayerRole(3, Player::SCORER);
-    setPlayerRole(4, Player::ATTACKER);
-    setPlayerRole(5, Player::DEFENDER);
-
     resetScore();
+
+    setPlayerRole(1, Player::ATTACKER);
+    setPlayerRole(2, Player::ATTACKER);
+    setPlayerRole(3, Player::SCORER);
+    setPlayerRole(4, Player::SCORER);
+    setPlayerRole(5, Player::DEFENDER);
 }
 
 void Team::setPlayerRole(int playerNum, int role)
@@ -88,9 +88,9 @@ void Team::setPlayerRole(int playerNum, int role)
 
 void Team::setTeam(int team)
 {
-    for(int i = 0; i < players.size(); i++)
+    for(int i = 0; i < squad.size(); i++)
     {
-        players[i]->setTeam(team);
+        squad[i]->setTeam(team);
     }
 }
 
@@ -119,6 +119,11 @@ Player* Team::getPlayer(int playerNum)
     return players[playerNum];
 }
 
+Player* Team::getSub(int playerNum)
+{
+    return subs[playerNum];
+}
+
 void Team::addPlayer(Player *p)
 {
     if(players.size() < 5)
@@ -141,3 +146,34 @@ void Team::resetScore()
 {
     score = 0;
 }
+
+void Team::initTeam()
+{
+    for(int i =0; i < 5; i++)
+    {
+        players.push_back(squad[i]);
+    }
+
+    for(int i = 5; i < squad.size(); i++)
+    {
+        subs.push_back(squad[i]);
+    }
+}
+
+void Team::makeSub(int playerIndex, int subIndex)
+{
+    Player* player = players[playerIndex];
+    Player* sub = subs[subIndex];
+
+    players.erase(players.begin() + playerIndex);
+    subs.erase(subs.begin() + subIndex);
+
+    players.push_back(sub);
+    subs.push_back(player);
+}
+
+int Team::getNumSubs()
+{
+    return subs.size();
+}
+

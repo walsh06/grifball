@@ -15,9 +15,10 @@ void Match::sim(MatchScreen* screen)
     this->screen = screen;
     resetRound();
     int timer;
-    cout << teamOne->getPlayer(0)->getRoleString() << endl;
+
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
+        cout << teamOne->getPlayer(0)->getRole()<< endl;
         screen->resetKillFeed();
         cout<< "TIME: " << timer << endl;
     setMoveOrder();
