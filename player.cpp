@@ -408,3 +408,20 @@ vector<string> Player::getStatString()
     statLine.push_back(scoreStream.str());
     return statLine;
 }
+
+vector<string> Player::getRatingLine()
+{
+    stringstream attStream, agilStream, jumpStream, passStream;
+    attStream << attack;
+    agilStream << agility;
+    jumpStream << jumping;
+    passStream << pass;
+
+    vector<string> ratingLine;
+    ratingLine.push_back(attStream.str());
+    ratingLine.push_back(agilStream.str());
+    ratingLine.push_back(jumpStream.str());
+    ratingLine.push_back(passStream.str());
+
+    return ratingLine;
+}

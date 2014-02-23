@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
 #include "matchscreen.h"
 #include "match.h"
 
@@ -43,6 +44,7 @@ private:
     Ui::MainWindow *ui;
     void initTacticScreen();
 
+    QLabel* ratings[5][4];
     int playerIndex, subIndex;
     Match *match;
 };

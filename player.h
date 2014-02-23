@@ -83,6 +83,7 @@ public:
     void resetScore();
 
     vector<string> getStatString();
+    vector<string> getRatingLine();
 
     void respawn();
     void kill();

@@ -15,6 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->teamOneName->setText(QString::fromStdString("Blues"));
     ui->teamTwoName->setText(QString::fromStdString("Reds"));
 
+    ratings[0][0] = ui->one_att;ratings[0][1] = ui->one_agil;ratings[0][2] = ui->one_jump;ratings[0][3] = ui->one_pass;
+    ratings[1][0] = ui->two_att;ratings[1][1] = ui->two_agil;ratings[1][2] = ui->two_jump;ratings[1][3] = ui->two_pass;
+    ratings[2][0] = ui->three_att;ratings[2][1] = ui->three_agil;ratings[2][2] = ui->three_jump;ratings[2][3] = ui->three_pass;
+    ratings[3][0] = ui->four_att;ratings[3][1] = ui->four_agil;ratings[3][2] = ui->four_jump;ratings[3][3] = ui->four_pass;
+    ratings[4][0] = ui->five_att;ratings[4][1] = ui->five_agil;ratings[4][2] = ui->five_jump;ratings[4][3] = ui->five_pass;
+
     initTacticScreen();
 }
 
@@ -72,6 +78,16 @@ void MainWindow::initTacticScreen()
     for(int i = 0; i < 5; i++)
     {
         ui->player_box->addItem(QString::fromStdString(match->getTeamOne()->getPlayer(i)->getName()));
+    }
+
+    for(int i = 0; i < 5; i++)
+    {
+        vector<string> ratingLine = match->getTeamOne()->getPlayer(i)->getRatingLine();
+
+        ratings[i][0]->setText(QString::fromStdString(ratingLine[0]));
+        ratings[i][1]->setText(QString::fromStdString(ratingLine[1]));
+        ratings[i][2]->setText(QString::fromStdString(ratingLine[2]));
+        ratings[i][3]->setText(QString::fromStdString(ratingLine[3]));
     }
 }
 
