@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     match.h \
     ball.h \
     filehelper.h \
-    matchscreen.h
+    matchscreen.h \
+    team.h
 
 FORMS    += mainwindow.ui \
     matchscreen.ui

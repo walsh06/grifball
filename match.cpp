@@ -118,12 +118,8 @@ void Match::checkWin(Player *p)
 
 void Match::attack(Player *p)
 {
-<<<<<<< HEAD
-    //cout << " Attacks";
-=======
     int randRating = Player::maxRating + 1;
-    cout << " Attacks";
->>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
+    //cout << " Attacks";
     int n = p->getTeam(), oppTeam;
     Player *opp;
     if(n == 1)
@@ -183,12 +179,8 @@ int Match::findPlayer(Player *p)
 
 void Match::dodge(Player *p)
 {
-<<<<<<< HEAD
-    //cout << " Jumps";
-=======
     int randRating = Player::maxRating + 1;
-    cout << " Jumps";
->>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
+    //cout << " Jumps";
     int team = p->getTeam(), oppTeam;
     Player *opp;
     if(team == 1)
@@ -238,14 +230,9 @@ void Match::dodge(Player *p)
 //======================================
 void Match::pass(Player *p)
 {
-<<<<<<< HEAD
-    //cout << " Pass ";
-    int passRoll =(rand()%11 + 1) + p->getPass();
-=======
     int randRating = Player::maxRating + 1;
-    cout << " Pass ";
+    //cout << " Pass ";
     int passRoll =(rand()%randRating + 1) + p->getPass();
->>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     Player* target = getTeammate(p);
 
     if(passRoll > 21)
