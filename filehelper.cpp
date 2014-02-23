@@ -1,4 +1,7 @@
 #include "filehelper.h"
+#include <iostream>
+
+using namespace std;
 
 Filehelper::Filehelper()
 {
@@ -6,6 +9,7 @@ Filehelper::Filehelper()
 
 vector<Player*> Filehelper::getTeamFromFile(string filename)
 {
+    int count = 0;
     Team* team;
     vector<Player *> players;
     string line;
@@ -16,7 +20,7 @@ vector<Player*> Filehelper::getTeamFromFile(string filename)
     if (myfile.is_open())
     {
 
-      while (getline(myfile,line) )
+      while (getline(myfile,line) && count < 10 )
       {
           istringstream ss(line);
           vector <string> player_data;
@@ -34,6 +38,7 @@ vector<Player*> Filehelper::getTeamFromFile(string filename)
 
           Player* p = new Player(player_data[0], att, pass,jump,agil,num);
           players.push_back(p);
+          count++;
       }
 
       myfile.close();

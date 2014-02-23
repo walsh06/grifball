@@ -53,3 +53,10 @@ void Ball::drop()
     team = -1;
     player = -1;
 }
+
+void Ball::reset()
+{
+    setPosX(3);
+    setPosY(3);
+    drop();
+}

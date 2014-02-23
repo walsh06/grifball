@@ -13,6 +13,10 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     srand( time(0));
     status = LOOSE_BALL;
     team = 0;
+    setRole(ATTACKER);
+    resetKill();
+    resetDeath();
+    resetScore();
 }
 
 void Player::kill()
@@ -340,4 +344,84 @@ int Player::getStatus()
 int Player::getRole()
 {
     return role;
+}
+
+void Player::addKill()
+{
+    kills++;
+}
+
+void Player::addDeath()
+{
+    deaths++;
+}
+
+void Player::addScore()
+{
+    scores++;
+}
+
+void Player::resetKill()
+{
+    kills = 0;
+}
+
+void Player::resetDeath()
+{
+    deaths = 0;
+}
+
+void Player::resetScore()
+{
+    scores = 0;
+}
+
+string Player::getRoleString()
+{
+    string roleString = "";
+    if(role == ATTACKER)
+    {
+        roleString = "Attacker";
+    }
+    else if(role == DEFENDER)
+    {
+        roleString = "Defender";
+    }
+    else if(role == SCORER)
+    {
+        roleString = "Scorer";
+    }
+
+    return roleString;
+}
+
+vector<string> Player::getStatString()
+{
+    stringstream killStream, deathStream, scoreStream;
+    killStream << kills;
+    deathStream << deaths;
+    scoreStream << scores;
+    vector<string> statLine;
+    statLine.push_back(name);
+    statLine.push_back(killStream.str());
+    statLine.push_back(deathStream.str());
+    statLine.push_back(scoreStream.str());
+    return statLine;
+}
+
+vector<string> Player::getRatingLine()
+{
+    stringstream attStream, agilStream, jumpStream, passStream;
+    attStream << attack;
+    agilStream << agility;
+    jumpStream << jumping;
+    passStream << pass;
+
+    vector<string> ratingLine;
+    ratingLine.push_back(attStream.str());
+    ratingLine.push_back(agilStream.str());
+    ratingLine.push_back(jumpStream.str());
+    ratingLine.push_back(passStream.str());
+
+    return ratingLine;
 }

@@ -10,24 +10,29 @@ Match::Match(string teamOneName, string teamTwoName)
     gameOver = false;
 }
 
-void Match::sim()
+void Match::sim(MatchScreen* screen)
 {
+    this->screen = screen;
+    resetRound();
     int timer;
+
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
+        cout << teamOne->getPlayer(0)->getRole()<< endl;
+        screen->resetKillFeed();
         cout<< "TIME: " << timer << endl;
     setMoveOrder();
     //setAllStatus();
     //printer();
     //int numPlayers = playersToMove.size();
-    for(int i = 0; i < playersToMove.size(); i++)
+    for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
     {
         Player* p = playersToMove[i];
         checkBall(p);
         setPlayerStatus(p);
         int act = p->getAction();
 
-        cout << p->getName();
+        //cout << p->getName();
 
         if(act == p->MOVE_UP)
         {
@@ -64,7 +69,12 @@ void Match::sim()
     }
     cout << "BALL TEAM: " << ball->getTeam() << " PLAYER: " << ball->getPlayer() << endl;
     //setAllStatus();
-    printer();
+    //printer();
+    screen->updateStatScreen(teamOne, teamTwo);
+    QTime dieTime= QTime::currentTime().addSecs(1);
+        while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     cout << "GAME OVER TIME: " << timer << endl;
     if(winningTeam == 1 || winningTeam == 2)
@@ -74,9 +84,8 @@ void Match::sim()
     else
     {
         cout << "DRAW" << endl;
-
     }
-
+    cout << teamOne->getScore() << "-" << teamTwo->getScore() << endl;
 }
 
 //===================================
@@ -88,9 +97,18 @@ void Match::checkWin(Player *p)
     int team = p->getTeam();
     if(ball->getPlayer() == p->getNumber() && p->getPosY() == 3 && (((p->getPosX() == 6 && team == 1) || (team == 2 && p->getPosX() == 0))))
     {
-        cout << " WOOOOOOOOOOOOOOOOOOOOOOO!!" << endl;
         roundOver = true;
         winningTeam = p->getTeam();
+        p->addScore();
+
+        if(p->getTeam() == 1)
+        {
+            teamOne->addScore();
+        }
+        else if(p->getTeam() == 2)
+        {
+            teamTwo->addScore();
+        }
     }
 }
 
@@ -100,8 +118,12 @@ void Match::checkWin(Player *p)
 
 void Match::attack(Player *p)
 {
+<<<<<<< HEAD
+    //cout << " Attacks";
+=======
     int randRating = Player::maxRating + 1;
     cout << " Attacks";
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     int n = p->getTeam(), oppTeam;
     Player *opp;
     if(n == 1)
@@ -119,14 +141,26 @@ void Match::attack(Player *p)
 
     if(attackRoll > dodgeRoll)
     {
-        cout << " and Kills " << opp->getName() << endl;
+        //cout << " and Kills " << opp->getName() << endl;
         opp->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(opp));
-        ball->drop();
+        screen->updateKillFeed(p, opp);
+
+        if(ball->getPlayer() == opp->getNumber())
+        {
+            screen->updateKill(p, opp);
+            ball->drop();
+        }
+
     }
     else
     {
-        cout << " but misses " << opp->getName() << endl;
+        if(ball->getPlayer() == opp->getNumber())
+        {
+            screen->updateDodge(p, opp);
+            ball->drop();
+        }
+        //cout << " but misses " << opp->getName() << endl;
     }
 }
 
@@ -149,8 +183,12 @@ int Match::findPlayer(Player *p)
 
 void Match::dodge(Player *p)
 {
+<<<<<<< HEAD
+    //cout << " Jumps";
+=======
     int randRating = Player::maxRating + 1;
     cout << " Jumps";
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     int team = p->getTeam(), oppTeam;
     Player *opp;
     if(team == 1)
@@ -168,14 +206,17 @@ void Match::dodge(Player *p)
 
     if(attackRoll > dodgeRoll)
     {
-        cout << " but is killed by Kills " << opp->getName() << endl;
+        //cout << " but is killed by Kills " << opp->getName() << endl;
         p->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(p));
         ball->drop();
+        screen->updateKill(opp, p);
+        screen->updateKillFeed(opp, p);
     }
     else
     {
-        cout << " and gets past" << opp->getName() << endl;
+        screen->updateDodge(opp, p);
+        //cout << " and gets past" << opp->getName() << endl;
         if(team == 1)
         {
             p->setPosX(p->getPosX() + 1);
@@ -197,21 +238,31 @@ void Match::dodge(Player *p)
 //======================================
 void Match::pass(Player *p)
 {
+<<<<<<< HEAD
+    //cout << " Pass ";
+    int passRoll =(rand()%11 + 1) + p->getPass();
+=======
     int randRating = Player::maxRating + 1;
     cout << " Pass ";
     int passRoll =(rand()%randRating + 1) + p->getPass();
+>>>>>>> 1c94a364de1e26b941ce9db8464047cdc99f024b
     Player* target = getTeammate(p);
 
     if(passRoll > 21)
     {
-        cout << "To " << target->getName() << endl;
+        //cout << "To " << target->getName() << endl;
+
+        screen->updatePass(p, target);
         updateBall(target);
         setPlayerStatus(target);
         setPlayerStatus(p);
     }
     else
     {
-        cout << "Misses pass to " << target->getName() << " , Loose Ball!!" << endl;
+        stringstream message ;
+        message << p->getName() << " missed with a bad pass to " << target->getName();
+        screen->updateMissPass(p, target);
+        //cout << "Misses pass to " << target->getName() << " , Loose Ball!!" << endl;
         ball->drop();
         setMissPass(target->getPosX(), target->getPosY());
         setAllStatus();
@@ -302,7 +353,7 @@ void Match::setMissPass(int x, int y)
 //================================
 void Match::moveUp(Player *p)
 {
-    cout << " Moves Forward" << endl;
+   // cout << " Moves Forward" << endl;
 
     if(p->getStatus() == p->BALL_WITH_OPP)
     {
@@ -323,6 +374,7 @@ void Match::moveUp(Player *p)
         if(p->getNumber() == ball->getPlayer())
         {
             updateBall(p);
+            screen->updateMove(p, p->MOVE_UP);
         }
     }
 
@@ -331,7 +383,7 @@ void Match::moveUp(Player *p)
 
 void Match::moveBack(Player *p)
 {
-    cout << " Moves Backward" << endl;
+    //cout << " Moves Backward" << endl;
 
     int team = p->getTeam();
 
@@ -347,12 +399,13 @@ void Match::moveBack(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
+        screen->updateMove(p, p->MOVE_DOWN);
     }
 }
 
 void Match::moveLeft(Player *p)
 {
-    cout << " Moves Left" << endl;
+    //cout << " Moves Left" << endl;
 
     int team = p->getTeam();
 
@@ -368,13 +421,14 @@ void Match::moveLeft(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
+        screen->updateMove(p, p->MOVE_LEFT);
     }
 }
 
 
 void Match::moveRight(Player *p)
 {
-    cout << " Moves Right" << endl;
+    //cout << " Moves Right" << endl;
 
     int team = p->getTeam();
 
@@ -390,6 +444,7 @@ void Match::moveRight(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
+        screen->updateMove(p, p->MOVE_RIGHT);
     }
 }
 
@@ -461,11 +516,10 @@ void Match::moveTowardBall(Player *p)
 void Match::checkBall(Player *p)
 {
     int x = ball->getPosX(), y =  ball->getPosY(), px = p->getPosX(), py = p->getPosY();
-
     if(py == y && px == x && ball->getTeam() == -1)
     {
-        updateBall(p);
-        cout << p->getName() << " Picked up ball" << endl;
+       updateBall(p);
+       screen->updatePickup(p);
     }
 }
 
@@ -612,4 +666,32 @@ void Match::printer()
         Player p = *playersToMove[i];
         cout<<"NAME: " << p.getName() << " X: " << p.getPosX() << " Y: " << p.getPosY() << " STATUS: " << p.getStatus() << endl;
     }
+}
+
+void Match::resetRound()
+{
+    teamOne->startSpawn();
+    teamTwo->startSpawn();
+    ball->reset();
+    roundOver = false;
+}
+
+int Match::getTeamOneScore()
+{
+    teamOne->getScore();
+}
+
+int Match::getTeamTwoScore()
+{
+    teamTwo->getScore();
+}
+
+Team* Match::getTeamOne()
+{
+    return teamOne;
+}
+
+Team* Match::getTeamTwo()
+{
+    return teamTwo;
 }

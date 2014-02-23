@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Match m("blues", "reds");
+   // Match m("blues", "reds");
 
-    m.sim();
+    //
     return a.exec();
 }

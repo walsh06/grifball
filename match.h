@@ -4,12 +4,22 @@
 #include "team.h"
 #include "ball.h"
 #include "filehelper.h"
+#include "matchscreen.h"
 
 #include <iostream>
 #include <vector>
 #include <time.h>
 #include <ctime>
 #include <cstdlib>
+#include <QWidget>
+#include <sstream>
+#include <chrono>
+#include <thread>
+
+#include <QTime>
+#include <QCoreApplication>
+#include <QEventLoop>
+
 
 
 using namespace std;
@@ -17,6 +27,8 @@ using namespace std;
 class Match
 {
 private:
+    MatchScreen* screen;
+
     Ball *ball;
     vector<Player *> playersToMove;
     Team *teamOne, *teamTwo;
@@ -51,9 +63,16 @@ private:
     void setMissPass(int x, int y);
     void printer();
 
+    void resetRound();
+
 public:
     Match(string teamOneName, string teamTwoName);
-    void sim();
+    void sim(MatchScreen* screen);
+
+    Team* getTeamOne();
+    Team* getTeamTwo();
+    int getTeamOneScore();
+    int getTeamTwoScore();
 };
 
 #endif // MATCH_H
