@@ -1,6 +1,9 @@
 #ifndef TEAM_H
 #define TEAM_H
 #include <vector>
+#include <algorithm>
+#include <iostream>
+
 #include "player.h"
 
 using namespace std;
@@ -27,9 +30,11 @@ public:
     void resetScore();
     void setPlayerRole(int playerNum, int role);
     void startSpawn();
+    void pickTeam();
 
     void makeSub(int playerIndex, int subIndex);
     int getNumSubs();
+
 };
 
 #endif // TEAM_H
