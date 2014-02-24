@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <dirent.h>
+#include <string>
+#include <vector>
+
 #include "matchscreen.h"
 #include "match.h"
 
@@ -40,13 +44,23 @@ private slots:
 
     void on_sub_button_clicked();
 
+    void on_team_one_currentIndexChanged(int index);
+
+    void on_team_two_currentIndexChanged(int index);
+
+    void on_start_match_clicked();
+
 private:
     Ui::MainWindow *ui;
     void initTacticScreen();
+    void initHomeScreen();
+    void initRoleBox();
 
     QLabel* ratings[5][4];
     int playerIndex, subIndex;
     Match *match;
+    string teamOneName, teamTwoName;
+    vector<string> teamNames;
 };
 
 #endif // MAINWINDOW_H

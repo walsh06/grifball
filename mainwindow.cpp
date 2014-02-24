@@ -6,9 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(1);
-
-    match = new Match("blues", "reds");
+    ui->stackedWidget->setCurrentIndex(2);
 
     ui->teamOneScore->display(0);
     ui->teamTwoScore->display(0);
@@ -21,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ratings[3][0] = ui->four_att;ratings[3][1] = ui->four_agil;ratings[3][2] = ui->four_jump;ratings[3][3] = ui->four_pass;
     ratings[4][0] = ui->five_att;ratings[4][1] = ui->five_agil;ratings[4][2] = ui->five_jump;ratings[4][3] = ui->five_pass;
 
-    initTacticScreen();
+    initHomeScreen();
 }
 
 MainWindow::~MainWindow()
@@ -38,8 +36,14 @@ MatchScreen* MainWindow::getMatchScreen()
 //Tactic Screen
 //======================
 
-void MainWindow::initTacticScreen()
+void MainWindow::initRoleBox()
 {
+    ui->roleOne->clear();
+    ui->roleTwo->clear();
+    ui->roleThree->clear();
+    ui->roleFour->clear();
+    ui->roleFive->clear();
+
     ui->roleOne->addItem(QString::fromStdString("Scorer"));
     ui->roleOne->addItem(QString::fromStdString("Attacker"));
     ui->roleOne->addItem(QString::fromStdString("Defender"));
@@ -55,7 +59,10 @@ void MainWindow::initTacticScreen()
     ui->roleFive->addItem(QString::fromStdString("Scorer"));
     ui->roleFive->addItem(QString::fromStdString("Attacker"));
     ui->roleFive->addItem(QString::fromStdString("Defender"));
+}
 
+void MainWindow::initTacticScreen()
+{
     ui->oneName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(0)->getName()));
     ui->twoName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(1)->getName()));
     ui->threeName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(2)->getName()));
@@ -80,6 +87,7 @@ void MainWindow::initTacticScreen()
         ui->player_box->addItem(QString::fromStdString(match->getTeamOne()->getPlayer(i)->getName()));
     }
 
+
     for(int i = 0; i < 5; i++)
     {
         vector<string> ratingLine = match->getTeamOne()->getPlayer(i)->getRatingLine();
@@ -90,8 +98,6 @@ void MainWindow::initTacticScreen()
         ratings[i][3]->setText(QString::fromStdString(ratingLine[3]));
     }
 }
-
-//========================
 
 void MainWindow::on_startButton_clicked()
 {
@@ -148,4 +154,59 @@ void MainWindow::on_sub_button_clicked()
 {
     match->getTeamOne()->makeSub(playerIndex, subIndex);
     initTacticScreen();
+}
+
+//============================================
+
+//===================================
+//Home Screen
+//===================================
+
+void MainWindow::initHomeScreen()
+{
+    DIR*    dir;
+    dirent* pdir;
+    string path = "teams/";
+    dir = opendir(path.c_str());
+
+    while (pdir = readdir(dir)) {
+        string name = pdir->d_name;
+        if(name != "." && name != ".." && name != "")
+        {
+            int lastindex = name.find_last_of(".");
+            string rawname = name.substr(0, lastindex);
+            cout << rawname << endl;
+            teamNames.push_back(rawname);
+        }
+    }
+
+    for(int i = 0; i < teamNames.size(); i++)
+    {
+        ui->team_one->addItem(QString::fromStdString(teamNames[i]));
+        ui->team_two->addItem(QString::fromStdString(teamNames[i]));
+    }
+
+    ui->team_one->setCurrentIndex(0);
+    ui->team_two->setCurrentIndex(1);
+    teamOneName = teamNames[0];
+    teamTwoName = teamNames[1];
+}
+
+void MainWindow::on_team_one_currentIndexChanged(int index)
+{
+    teamOneName = teamNames[index];
+}
+
+void MainWindow::on_team_two_currentIndexChanged(int index)
+{
+    teamTwoName = teamNames[index];
+}
+
+void MainWindow::on_start_match_clicked()
+{
+    match = new Match(teamOneName, teamTwoName);
+    initRoleBox();
+    match->getTeamTwo()->pickTeam();
+    initTacticScreen();
+    ui->stackedWidget->setCurrentIndex(1);
 }
