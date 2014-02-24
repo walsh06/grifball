@@ -142,3 +142,8 @@ void MatchScreen::tick(int time)
 {
     ui->clock->display(time);
 }
+
+void MatchScreen::clearMainOutput()
+{
+    ui->mainOutput->setText("");
+}

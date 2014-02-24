@@ -35,6 +35,7 @@ public:
 
     void updateStatScreen(Team* teamOne, Team* teamTwo);
 
+    void clearMainOutput();
     void tick(int time);
 
 private:

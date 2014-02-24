@@ -655,6 +655,7 @@ void Match::resetRound()
 {
     teamOne->startSpawn();
     teamTwo->startSpawn();
+    screen->clearMainOutput();
     ball->reset();
     roundOver = false;
 }

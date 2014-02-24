@@ -206,7 +206,7 @@ void MainWindow::on_start_match_clicked()
 {
     match = new Match(teamOneName, teamTwoName);
     initRoleBox();
-    match->getTeamOne()->pickTeam();
+    match->getTeamTwo()->pickTeam();
     initTacticScreen();
     ui->stackedWidget->setCurrentIndex(1);
 }
