@@ -36,8 +36,13 @@ MatchScreen* MainWindow::getMatchScreen()
 //Tactic Screen
 //======================
 
-void MainWindow::initTacticScreen()
+void MainWindow::initRoleBox()
 {
+    ui->roleOne->clear();
+    ui->roleTwo->clear();
+    ui->roleThree->clear();
+    ui->roleFour->clear();
+    ui->roleFive->clear();
 
     ui->roleOne->addItem(QString::fromStdString("Scorer"));
     ui->roleOne->addItem(QString::fromStdString("Attacker"));
@@ -54,7 +59,10 @@ void MainWindow::initTacticScreen()
     ui->roleFive->addItem(QString::fromStdString("Scorer"));
     ui->roleFive->addItem(QString::fromStdString("Attacker"));
     ui->roleFive->addItem(QString::fromStdString("Defender"));
+}
 
+void MainWindow::initTacticScreen()
+{
     ui->oneName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(0)->getName()));
     ui->twoName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(1)->getName()));
     ui->threeName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(2)->getName()));
@@ -197,6 +205,8 @@ void MainWindow::on_team_two_currentIndexChanged(int index)
 void MainWindow::on_start_match_clicked()
 {
     match = new Match(teamOneName, teamTwoName);
+    initRoleBox();
+    match->getTeamOne()->pickTeam();
     initTacticScreen();
     ui->stackedWidget->setCurrentIndex(1);
 }

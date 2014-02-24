@@ -54,6 +54,7 @@ private:
     Ui::MainWindow *ui;
     void initTacticScreen();
     void initHomeScreen();
+    void initRoleBox();
 
     QLabel* ratings[5][4];
     int playerIndex, subIndex;
