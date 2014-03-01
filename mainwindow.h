@@ -61,6 +61,8 @@ private:
     Match *match;
     string teamOneName, teamTwoName;
     vector<string> teamNames;
+
+    bool gameOver;
 };
 
 #endif // MAINWINDOW_H

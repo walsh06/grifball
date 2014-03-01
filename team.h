@@ -14,13 +14,14 @@ private:
     vector <Player*> subs;
     vector <Player*> squad;
     int score;
+    string name;
 
     void setTeam(int team);
     void initTeam();
 
 public:
     Team(int);
-    Team(vector<Player *> players, int teamNum);
+    Team(vector<Player *> players, int teamNum, string name);
     Player* getPlayer(int playerNum);
     Player* getSub(int playerNum);
     void addPlayer(Player *p);
@@ -34,6 +35,7 @@ public:
 
     void makeSub(int playerIndex, int subIndex);
     int getNumSubs();
+    string getName();
 
 };
 

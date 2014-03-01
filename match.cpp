@@ -2,8 +2,8 @@
 
 Match::Match(string teamOneName, string teamTwoName)
 {
-    teamOne = new Team(Filehelper::getTeamFromFile(teamOneName), 1);
-    teamTwo = new Team(Filehelper::getTeamFromFile(teamTwoName), 2);
+    teamOne = new Team(Filehelper::getTeamFromFile(teamOneName), 1, teamOneName);
+    teamTwo = new Team(Filehelper::getTeamFromFile(teamTwoName), 2, teamTwoName);
     ball = new Ball();
     srand( time(0));
     roundOver = false;

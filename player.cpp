@@ -82,6 +82,22 @@ void Player::setRole(int role)
     }
 }
 
+void Player::setMentality(int mentality)
+{
+    if(role == ATTACKER)
+    {
+
+    }
+    else if(role == DEFENDER)
+    {
+
+    }
+    else if(role == SCORER)
+    {
+
+    }
+}
+
 void Player::setAttack(int attack)
 {
     if(attack > maxRating)

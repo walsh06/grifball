@@ -53,12 +53,14 @@ Team::Team(int n)
     }
 }
 
-Team::Team(vector<Player *> players, int teamNum)
+Team::Team(vector<Player *> players, int teamNum, string name)
 {
     this->squad = players;
     initTeam();
     setTeam(teamNum);
     startSpawn();
+
+    this->name = name;
 
     resetScore();
 
@@ -298,5 +300,10 @@ void Team::makeSub(int playerIndex, int subIndex)
 int Team::getNumSubs()
 {
     return subs.size();
+}
+
+string Team::getName()
+{
+    return name;
 }
 

@@ -10,8 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->teamOneScore->display(0);
     ui->teamTwoScore->display(0);
-    ui->teamOneName->setText(QString::fromStdString("Blues"));
-    ui->teamTwoName->setText(QString::fromStdString("Reds"));
+
 
     ratings[0][0] = ui->one_att;ratings[0][1] = ui->one_agil;ratings[0][2] = ui->one_jump;ratings[0][3] = ui->one_pass;
     ratings[1][0] = ui->two_att;ratings[1][1] = ui->two_agil;ratings[1][2] = ui->two_jump;ratings[1][3] = ui->two_pass;
@@ -20,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ratings[4][0] = ui->five_att;ratings[4][1] = ui->five_agil;ratings[4][2] = ui->five_jump;ratings[4][3] = ui->five_pass;
 
     initHomeScreen();
+    gameOver = false;
 }
 
 MainWindow::~MainWindow()
@@ -101,12 +101,27 @@ void MainWindow::initTacticScreen()
 
 void MainWindow::on_startButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
-    match->sim(getMatchScreen());
+    if(gameOver == true)
+    {
+        gameOver = false;
+        ui->startButton->setText(QString::fromStdString("Start Round"));
+        ui->stackedWidget->setCurrentIndex(2);
+    }
+    else
+    {
+        ui->stackedWidget->setCurrentIndex(0);
+        match->sim(getMatchScreen());
 
-    ui->stackedWidget->setCurrentIndex(1);
-    ui->teamOneScore->display(match->getTeamOneScore());
-    ui->teamTwoScore->display(match->getTeamTwoScore());
+        ui->stackedWidget->setCurrentIndex(1);
+        ui->teamOneScore->display(match->getTeamOneScore());
+        ui->teamTwoScore->display(match->getTeamTwoScore());
+
+        if(match->getTeamOneScore() == 1 || match->getTeamTwoScore() == 1)
+        {
+            ui->startButton->setText(QString::fromStdString("Leave Game"));
+            gameOver = true;
+        }
+    }
 }
 
 
@@ -208,5 +223,10 @@ void MainWindow::on_start_match_clicked()
     initRoleBox();
     match->getTeamTwo()->pickTeam();
     initTacticScreen();
+    ui->teamOneScore->display(match->getTeamOneScore());
+    ui->teamTwoScore->display(match->getTeamTwoScore());
+    ui->teamOneName->setText(QString::fromStdString(match->getTeamOne()->getName()));
+    ui->teamTwoName->setText(QString::fromStdString(match->getTeamTwo()->getName()));
     ui->stackedWidget->setCurrentIndex(1);
+
 }

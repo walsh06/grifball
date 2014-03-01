@@ -25,6 +25,7 @@ class Player
 private:
     int attack, pass, agility, jumping;
 
+    int mentality;
     int with_ball[5];
     int team_ball[4];
     int opp_ball[4];
@@ -61,6 +62,7 @@ public:
     void setRole(int role);
     void setMove(int move);
     void setTeam(int team);
+    void setMentality(int mentality);
 
     string getRoleString();
     int getRole();
