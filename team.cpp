@@ -252,6 +252,23 @@ void Team::setPlayerRole(int playerNum, int role)
     }
 }
 
+void Team::setPlayerMentality(int playerNum, int mentality)
+{
+    Player *player;
+    for(int i = 0; i < players.size(); i++)
+    {
+        if(players[i]->getNumber() == playerNum)
+        {
+            player = players[i];
+        }
+    }
+
+    if(player != NULL)
+    {
+        player->setMentality(mentality);
+    }
+}
+
 Player* Team::getPlayer(int playerNum)
 {
     return players[playerNum];

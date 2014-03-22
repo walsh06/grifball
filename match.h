@@ -44,6 +44,7 @@ private:
     void attack(Player *p);
     void moveTowardBall(Player *p);
     void moveTowardGoal(Player *p);
+    void moveToOwnGoal(Player *p);
 
     void dodge(Player* p);
 
