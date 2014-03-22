@@ -30,6 +30,7 @@ public:
     void addScore();
     void resetScore();
     void setPlayerRole(int playerNum, int role);
+    void setPlayerMentality(int playerNum, int mentality);
     void startSpawn();
     void pickTeam();
 

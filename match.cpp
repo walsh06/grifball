@@ -64,6 +64,10 @@ void Match::sim(MatchScreen* screen)
             {
                 moveTowardGoal(p);
             }
+            else if(act == p->MOVE_TO_OWN_GOAL)
+            {
+                moveToOwnGoal(p);
+            }
         }
     cout << "BALL TEAM: " << ball->getTeam() << " PLAYER: " << ball->getPlayer() << endl;
     screen->updateStatScreen(teamOne, teamTwo);
@@ -470,6 +474,44 @@ void Match::moveTowardGoal(Player *p)
     }
 }
 
+void Match::moveToOwnGoal(Player *p)
+{
+    int x, y;
+    int team = p->getTeam();
+    int px = p->getPosX(), py = p->getPosY();
+
+    if(team == 1)
+    {
+        x = 0;
+        y = 3;
+    }
+    else if(team == 2)
+    {
+        x = 6;
+        y = 3;
+    }
+
+    if((px < x && team == 1) || (px > x && team == 2))
+    {
+        moveUp(p);
+    }
+    else if((px < x && team == 2) || (px > x && team == 1))
+    {
+        moveBack(p);
+    }
+    else if((py < y && team == 1) || (py > y && team == 2))
+    {
+        moveLeft(p);
+    }
+    else if((py < y && team == 2) || (py > y && team == 1))
+    {
+        moveRight(p);
+    }
+    else if(py == y && px == x)
+    {
+        moveUp(p);
+    }
+}
 
 void Match::moveTowardBall(Player *p)
 {

@@ -61,6 +61,50 @@ void MainWindow::initRoleBox()
     ui->roleFive->addItem(QString::fromStdString("Defender"));
 }
 
+void MainWindow::initMenBox()
+{
+    for(int i = 0; i < 5; i++)
+    {
+        loadSingleMenBox(i);
+    }
+}
+
+void MainWindow::loadSingleMenBox(int num)
+{
+    QComboBox* menBox [5];
+
+    menBox[0] = ui->menOne;
+    menBox[1] = ui->menTwo;
+    menBox[2] = ui->menThree;
+    menBox[3] = ui->menFour;
+    menBox[4] = ui->menFive;
+
+    if(num >= 0 && num < 5)
+    {
+        QComboBox* box = menBox[num];
+        box->clear();
+        Player* p = match->getTeamOne()->getPlayer(num);
+        if(p->getRole() == p->ATTACKER)
+        {
+            menBox[num]->addItem(QString::fromStdString("Normal"));
+            menBox[num]->addItem(QString::fromStdString("Berserker"));
+            menBox[num]->addItem(QString::fromStdString("Scoring"));
+        }
+        else if(p->getRole() == p->SCORER)
+        {
+            menBox[num]->addItem(QString::fromStdString("Normal"));
+            menBox[num]->addItem(QString::fromStdString("Full"));
+            menBox[num]->addItem(QString::fromStdString("Playmaker"));
+        }
+        else if(p->getRole() == p->DEFENDER)
+        {
+            menBox[num]->addItem(QString::fromStdString("Normal"));
+            menBox[num]->addItem(QString::fromStdString("Dynamic"));
+            menBox[num]->addItem(QString::fromStdString("Full"));
+        }
+    }
+}
+
 void MainWindow::initTacticScreen()
 {
     ui->oneName->setText(QString::fromStdString(match->getTeamOne()->getPlayer(0)->getName()));
@@ -116,7 +160,7 @@ void MainWindow::on_startButton_clicked()
         ui->teamOneScore->display(match->getTeamOneScore());
         ui->teamTwoScore->display(match->getTeamTwoScore());
 
-        if(match->getTeamOneScore() == 1 || match->getTeamTwoScore() == 1)
+        if(match->getTeamOneScore() == 4 || match->getTeamTwoScore() == 4)
         {
             ui->startButton->setText(QString::fromStdString("Leave Game"));
             gameOver = true;
@@ -129,30 +173,70 @@ void MainWindow::on_roleOne_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(0)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+
+    loadSingleMenBox(0);
 }
 
 void MainWindow::on_roleTwo_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(1)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+
+    loadSingleMenBox(1);
 }
 
 void MainWindow::on_roleThree_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(2)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+
+    loadSingleMenBox(2);
 }
 
 void MainWindow::on_roleFour_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(3)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+
+    loadSingleMenBox(3);
 }
 
 void MainWindow::on_roleFive_currentIndexChanged(int index)
 {
     int num = match->getTeamOne()->getPlayer(4)->getNumber();
     match->getTeamOne()->setPlayerRole(num, index+1);
+
+    loadSingleMenBox(4);
+}
+
+void MainWindow::on_menOne_currentIndexChanged(int index)
+{
+    int num = match->getTeamOne()->getPlayer(0)->getNumber();
+    match->getTeamOne()->setPlayerMentality(num, index+1);
+}
+
+void MainWindow::on_menTwo_currentIndexChanged(int index)
+{
+    int num = match->getTeamOne()->getPlayer(1)->getNumber();
+    match->getTeamOne()->setPlayerMentality(num, index+1);
+}
+
+void MainWindow::on_menThree_currentIndexChanged(int index)
+{
+    int num = match->getTeamOne()->getPlayer(2)->getNumber();
+    match->getTeamOne()->setPlayerMentality(num, index+1);
+}
+
+void MainWindow::on_menFour_currentIndexChanged(int index)
+{
+    int num = match->getTeamOne()->getPlayer(3)->getNumber();
+    match->getTeamOne()->setPlayerMentality(num, index+1);
+}
+
+void MainWindow::on_menFive_currentIndexChanged(int index)
+{
+    int num = match->getTeamOne()->getPlayer(4)->getNumber();
+    match->getTeamOne()->setPlayerMentality(num, index+1);
 }
 
 void MainWindow::on_player_box_currentIndexChanged(int index)

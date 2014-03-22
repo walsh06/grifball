@@ -50,11 +50,23 @@ private slots:
 
     void on_start_match_clicked();
 
+    void on_menOne_currentIndexChanged(int index);
+
+    void on_menTwo_currentIndexChanged(int index);
+
+    void on_menThree_currentIndexChanged(int index);
+
+    void on_menFour_currentIndexChanged(int index);
+
+    void on_menFive_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     void initTacticScreen();
     void initHomeScreen();
     void initRoleBox();
+    void initMenBox();
+    void loadSingleMenBox(int num);
 
     QLabel* ratings[5][4];
     int playerIndex, subIndex;

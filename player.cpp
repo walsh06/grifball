@@ -17,6 +17,7 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     resetKill();
     resetDeath();
     resetScore();
+    mentality = 1;
 }
 
 void Player::kill()
@@ -44,6 +45,23 @@ void Player::respawn()
 
 void Player::setRole(int role)
 {
+    this->role = role;
+    if(role == SCORER)
+    {
+        setMentality(mentality);
+    }
+    else if(role == ATTACKER)
+    {
+        setMentality(mentality);
+    }
+    else if(role == DEFENDER)
+    {
+        setMentality(mentality);
+    }
+}
+
+void Player::setMentality(int mentality)
+{
     /*
      *with_ball {move_towards_goal, move_down, move_left, move_right, pass}
      *team_ball {move_up, move_down, move_left, move_right}
@@ -52,49 +70,96 @@ void Player::setRole(int role)
      *loose_ball{move_toward_ball, move_back}
      *ball_with_opp{move_towards_goal, move_down, move_left, move_right, pass}
      **/
-    this->role = role;
-    if(role == SCORER)
-    {
-        with_ball[0] = 70; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 15;
-        team_ball[0] = 75; team_ball[1] = 5; team_ball[2] = 10; team_ball[3] = 10;
-        opp_ball[0] = 60; opp_ball[1] = 20; opp_ball[2] = 10; opp_ball[3] = 10;
-        opp_in_square[0] = 40; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 40;
-        loose_ball[0] = 95; loose_ball[1] = 5;
-        ball_with_opp[0] = 50; ball_with_opp[1] = 5; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 15;
-    }
-    else if(role == ATTACKER)
-    {
-        with_ball[0] = 60; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 25;
-        team_ball[0] = 80; team_ball[1] = 4; team_ball[2] = 8; team_ball[3] = 8;
-        opp_ball[0] = 85; opp_ball[1] = 5; opp_ball[2] = 5; opp_ball[3] = 5;
-        opp_in_square[0] = 5; opp_in_square[1] = 5; opp_in_square[2] = 5; opp_in_square[3] = 85;
-        loose_ball[0] = 95; loose_ball[1] = 5;
-        ball_with_opp[0] = 40; ball_with_opp[1] = 10; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 20;
-    }
-    else if(role == DEFENDER)
-    {
-        with_ball[0] = 40; with_ball[1] = 4; with_ball[2] = 8; with_ball[3] = 8; with_ball[4] = 40;
-        team_ball[0] = 60; team_ball[1] = 10; team_ball[2] = 15; team_ball[3] = 15;
-        opp_ball[0] = 30; opp_ball[1] = 40; opp_ball[2] = 15; opp_ball[3] = 15;
-        opp_in_square[0] = 10; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 70;
-        loose_ball[0] = 75; loose_ball[1] = 25;
-        ball_with_opp[0] = 30; ball_with_opp[1] = 30; ball_with_opp[2] = 10; ball_with_opp[3] = 10; ball_with_opp[4] = 20;
-    }
-}
-
-void Player::setMentality(int mentality)
-{
+    this->mentality = mentality;
     if(role == ATTACKER)
     {
-
+        if(mentality == 1)//Normal
+        {
+            with_ball[0] = 60; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 25;
+            team_ball[0] = 60; team_ball[1] = 4; team_ball[2] = 24; team_ball[3] = 24;
+            opp_ball[0] = 85; opp_ball[1] = 5; opp_ball[2] = 5; opp_ball[3] = 5;
+            opp_in_square[0] = 5; opp_in_square[1] = 5; opp_in_square[2] = 5; opp_in_square[3] = 85;
+            loose_ball[0] = 95; loose_ball[1] = 5;
+            ball_with_opp[0] = 40; ball_with_opp[1] = 10; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 20;
+        }
+        else if(mentality == 2)//Berserker
+        {
+            with_ball[0] = 60; with_ball[1] = 0; with_ball[2] = 0; with_ball[3] = 0; with_ball[4] = 40;
+            team_ball[0] = 45; team_ball[1] = 5; team_ball[2] = 25; team_ball[3] = 25;
+            opp_ball[0] = 100; opp_ball[1] = 0; opp_ball[2] = 0; opp_ball[3] = 0;
+            opp_in_square[0] = 0; opp_in_square[1] = 0; opp_in_square[2] = 0; opp_in_square[3] = 100;
+            loose_ball[0] = 100; loose_ball[1] = 0;
+            ball_with_opp[0] = 60; ball_with_opp[1] = 0; ball_with_opp[2] = 7; ball_with_opp[3] = 7; ball_with_opp[4] = 26;
+        }
+        else if(mentality == 3)//Scoring
+        {
+            with_ball[0] = 70; with_ball[1] = 0; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 20;
+            team_ball[0] = 45; team_ball[1] = 5; team_ball[2] = 25; team_ball[3] = 25;
+            opp_ball[0] = 76; opp_ball[1] = 10; opp_ball[2] = 7; opp_ball[3] = 7;
+            opp_in_square[0] = 10; opp_in_square[1] = 0; opp_in_square[2] = 0; opp_in_square[3] = 90;
+            loose_ball[0] = 95; loose_ball[1] = 5;
+            ball_with_opp[0] = 80; ball_with_opp[1] = 0; ball_with_opp[2] = 5; ball_with_opp[3] = 5; ball_with_opp[4] = 10;
+        }
     }
     else if(role == DEFENDER)
     {
-
+        if(mentality == 1)//Normal
+        {
+            with_ball[0] = 40; with_ball[1] = 4; with_ball[2] = 8; with_ball[3] = 8; with_ball[4] = 40;
+            team_ball[0] = 50; team_ball[1] = 20; team_ball[2] = 15; team_ball[3] = 15;
+            opp_ball[0] = 30; opp_ball[1] = 40; opp_ball[2] = 15; opp_ball[3] = 15;
+            opp_in_square[0] = 10; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 70;
+            loose_ball[0] = 75; loose_ball[1] = 25;
+            ball_with_opp[0] = 30; ball_with_opp[1] = 30; ball_with_opp[2] = 10; ball_with_opp[3] = 10; ball_with_opp[4] = 20;
+        }
+        else if(mentality == 2)//Dynamic
+        {
+            with_ball[0] = 40; with_ball[1] = 4; with_ball[2] = 8; with_ball[3] = 8; with_ball[4] = 40;
+            team_ball[0] = 60; team_ball[1] = 10; team_ball[2] = 15; team_ball[3] = 15;
+            opp_ball[0] = 40; opp_ball[1] = 40; opp_ball[2] = 10; opp_ball[3] = 10;
+            opp_in_square[0] = 10; opp_in_square[1] = 5; opp_in_square[2] = 5; opp_in_square[3] = 80;
+            loose_ball[0] = 85; loose_ball[1] = 15;
+            ball_with_opp[0] = 30; ball_with_opp[1] = 20; ball_with_opp[2] = 5; ball_with_opp[3] = 5; ball_with_opp[4] = 40;
+        }
+        else if(mentality == 3)//Full Back
+        {
+            with_ball[0] = 30; with_ball[1] = 5; with_ball[2] = 10; with_ball[3] = 10; with_ball[4] = 45;
+            team_ball[0] = 40; team_ball[1] = 30; team_ball[2] = 15; team_ball[3] = 15;
+            opp_ball[0] = 0; opp_ball[1] = 60; opp_ball[2] = 20; opp_ball[3] = 20;
+            opp_in_square[0] = 30; opp_in_square[1] = 5; opp_in_square[2] = 5; opp_in_square[3] = 60;
+            loose_ball[0] = 50; loose_ball[1] = 50;
+            ball_with_opp[0] = 0; ball_with_opp[1] = 40; ball_with_opp[2] = 10; ball_with_opp[3] = 10; ball_with_opp[4] = 50;
+        }
     }
     else if(role == SCORER)
     {
-
+        if(mentality == 1)//Normal
+        {
+            with_ball[0] = 70; with_ball[1] = 5; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 15;
+            team_ball[0] = 75; team_ball[1] = 5; team_ball[2] = 10; team_ball[3] = 10;
+            opp_ball[0] = 60; opp_ball[1] = 20; opp_ball[2] = 10; opp_ball[3] = 10;
+            opp_in_square[0] = 40; opp_in_square[1] = 10; opp_in_square[2] = 10; opp_in_square[3] = 40;
+            loose_ball[0] = 95; loose_ball[1] = 5;
+            ball_with_opp[0] = 50; ball_with_opp[1] = 5; ball_with_opp[2] = 15; ball_with_opp[3] = 15; ball_with_opp[4] = 15;
+        }
+        else if(mentality == 2)//Full Forward
+        {
+            with_ball[0] = 90; with_ball[1] = 0; with_ball[2] = 0; with_ball[3] = 0; with_ball[4] = 10;
+            team_ball[0] = 80; team_ball[1] = 0; team_ball[2] = 10; team_ball[3] = 10;
+            opp_ball[0] = 75; opp_ball[1] = 15; opp_ball[2] = 5; opp_ball[3] = 5;
+            opp_in_square[0] = 30; opp_in_square[1] = 20; opp_in_square[2] = 20; opp_in_square[3] = 30;
+            loose_ball[0] = 100; loose_ball[1] = 0;
+            ball_with_opp[0] = 80; ball_with_opp[1] = 0; ball_with_opp[2] = 3; ball_with_opp[3] = 3; ball_with_opp[4] = 14;
+        }
+        else if(mentality == 3)//Playmaker
+        {
+            with_ball[0] = 60; with_ball[1] = 0; with_ball[2] = 5; with_ball[3] = 5; with_ball[4] = 30;
+            team_ball[0] = 90; team_ball[1] = 0; team_ball[2] = 5; team_ball[3] = 5;
+            opp_ball[0] = 75; opp_ball[1] = 15; opp_ball[2] = 5; opp_ball[3] = 5;
+            opp_in_square[0] = 30; opp_in_square[1] = 20; opp_in_square[2] = 20; opp_in_square[3] = 30;
+            loose_ball[0] = 100; loose_ball[1] = 0;
+            ball_with_opp[0] = 40; ball_with_opp[1] = 0; ball_with_opp[2] = 5; ball_with_opp[3] = 5; ball_with_opp[4] = 50;
+        }
     }
 }
 
@@ -250,7 +315,7 @@ int Player::getAction()
         }
         else if(n < opp_ball[0] + opp_ball[1])
         {
-            action = MOVE_DOWN;
+            action = MOVE_TO_OWN_GOAL;
         }
         else if(n < opp_ball[0] + opp_ball[1] + opp_ball[2])
         {
