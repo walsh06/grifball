@@ -38,8 +38,8 @@
     <widget class="QTextBrowser" name="mainOutput">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>480</y>
+       <x>50</x>
+       <y>510</y>
        <width>711</width>
        <height>41</height>
       </rect>
@@ -49,7 +49,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>390</y>
+       <y>420</y>
        <width>181</width>
        <height>81</height>
       </rect>
@@ -72,10 +72,10 @@ color: rgb(0, 170, 0);</string>
     <widget class="QGraphicsView" name="field">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>150</x>
        <y>50</y>
-       <width>500</width>
-       <height>250</height>
+       <width>460</width>
+       <height>360</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -85,8 +85,8 @@ color: rgb(0, 170, 0);</string>
       <rectf>
        <x>0.000000000000000</x>
        <y>0.000000000000000</y>
-       <width>200.000000000000000</width>
-       <height>200.000000000000000</height>
+       <width>450.000000000000000</width>
+       <height>350.000000000000000</height>
       </rectf>
      </property>
     </widget>

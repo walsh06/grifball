@@ -26,6 +26,7 @@ void Match::sim(MatchScreen* screen)
         screen->tick(timer);
         cout << teamOne->getPlayer(0)->getRole()<< endl;
         screen->resetKillFeed();
+        screen->displayPlayers(teamOne, teamTwo);
         cout<< "TIME: " << timer << endl;
         setMoveOrder();
         for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
@@ -100,7 +101,7 @@ void Match::sim(MatchScreen* screen)
 void Match::checkWin(Player *p)
 {
     int team = p->getTeam();
-    if(ball->getPlayer() == p->getNumber() && p->getPosY() == 3 && (((p->getPosX() == 6 && team == 1) || (team == 2 && p->getPosX() == 0))))
+    if(ball->getPlayer() == p->getNumber() && p->getPosY() == 3 && (((p->getPosX() == 8 && team == 1) || (team == 2 && p->getPosX() == 0))))
     {
         roundOver = true;
         winningTeam = p->getTeam();
@@ -322,11 +323,11 @@ void Match::setMissPass(int x, int y)
     while(finished == false)
     {
         ranX = -1; ranY = -1;
-        while(ranX < 0 || ranX > 6)
+        while(ranX < 0 || ranX > 8)
         {
             ranX = ((rand()% 3) -1) + x;
         }
-        while(ranY < 0 || ranY > 6)
+        while(ranY < 0 || ranY > 8)
         {
             ranY = ((rand()% 3) -1) + y;
         }
@@ -448,7 +449,7 @@ void Match::moveTowardGoal(Player *p)
 
     if(team == 1)
     {
-        x = 6;
+        x = 8;
         y = 3;
     }
     else if(team == 2)
@@ -492,7 +493,7 @@ void Match::moveToOwnGoal(Player *p)
     }
     else if(team == 2)
     {
-        x = 6;
+        x = 8;
         y = 3;
     }
 

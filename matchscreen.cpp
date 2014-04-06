@@ -19,6 +19,13 @@ MatchScreen::MatchScreen(QWidget *parent) :
     statsTwo[0][2] = ui->two_three;statsTwo[1][2] = ui->two_three_kills;statsTwo[2][2] = ui->two_three_deaths;statsTwo[3][2] = ui->two_three_scores;
     statsTwo[0][3] = ui->two_four;statsTwo[1][3] = ui->two_four_kills;statsTwo[2][3] = ui->two_four_deaths;statsTwo[3][3] = ui->two_four_scores;
     statsTwo[0][4] = ui->two_five;statsTwo[1][4] = ui->two_five_kills;statsTwo[2][4] = ui->two_five_deaths;statsTwo[3][4] = ui->two_five_scores;
+
+    redBrush = new QBrush(Qt::red);
+    blueBrush = new QBrush(Qt::blue);
+    yellowBrush = new QBrush(Qt::yellow);
+    blackPen = new QPen(Qt::black);
+
+    srand( time(0));
 }
 
 MatchScreen::~MatchScreen()
@@ -145,4 +152,48 @@ void MatchScreen::tick(int time)
 void MatchScreen::clearMainOutput()
 {
     ui->mainOutput->setText("");
+}
+
+void MatchScreen::displayPlayers(Team *teamOne, Team *teamTwo)
+{
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    vector<Player *> playersOne = teamOne->getPlayers();
+    vector<Player *> playersTwo = teamTwo->getPlayers();
+    int x, y, drawX, drawY, posModX, posModY;
+
+    for(int i = 0; i < 5; i++)
+    {
+        x = playersOne[i]->getPosX();
+        y = playersOne[i]->getPosY();
+        posModX = rand()%50;
+        posModY = rand()%50;
+        drawX = (x * 50) + posModX;
+        drawY = (y * 50) + posModY;
+
+        if(playersOne[i]->getStatus() == Player::HAS_BALL)
+        {
+            scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *yellowBrush);
+        }
+        else
+        {
+            scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *redBrush);
+        }
+        x = playersTwo[i]->getPosX();
+        y = playersTwo[i]->getPosY();
+
+        posModX = rand()%50;
+        posModY = rand()%50;
+        drawX = (x * 50) + posModX;
+        drawY = (y * 50) + posModY;
+        if(playersTwo[i]->getStatus() == Player::HAS_BALL)
+        {
+            scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *yellowBrush);
+        }
+        else
+        {
+            scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *blueBrush);
+        }
+    }
+
+    ui->field->setScene(scene);
 }

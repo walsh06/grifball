@@ -38,6 +38,7 @@ public:
     int getNumSubs();
     string getName();
 
+    vector<Player *> getPlayers();
 };
 
 #endif // TEAM_H
