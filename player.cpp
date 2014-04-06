@@ -255,11 +255,6 @@ int Player::getPosY()
     return position[1];
 }
 
-int Player::getPass()
-{
-    return pass;
-}
-
 int Player::getAction()
 {
     int n=rand()%100;
@@ -397,9 +392,14 @@ int Player::getMove()
     return move;
 }
 
+int Player::getPass()
+{
+    return pass + formModifier;
+}
+
 int Player::getAgility()
 {
-    return agility;
+    return agility + formModifier;
 }
 
 int Player::getNumber()
@@ -409,12 +409,12 @@ int Player::getNumber()
 
 int Player::getAttack()
 {
-    return attack;
+    return attack + formModifier;
 }
 
 int Player::getJump()
 {
-    return jumping;
+    return jumping + formModifier;
 }
 
 int Player::getStatus()
@@ -455,6 +455,52 @@ void Player::resetDeath()
 void Player::resetScore()
 {
     scores = 0;
+}
+
+void Player::resetEnergy()
+{
+    energy = 20;
+}
+
+void Player::decreaseEnergy()
+{
+    energy = energy - (2 + (20 - stamina));
+    if(energy < 0)
+    {
+        energy = 0;
+    }
+}
+
+void Player::calculateFormModifier()
+{
+    formModifier = 0;
+    int energyMod;
+    int statMod;
+
+    if(energy > 16)
+    {
+        energyMod = 0;
+    }
+    else if(energy > 12)
+    {
+        energyMod = 1;
+    }
+    else if(energy > 8)
+    {
+        energyMod = 2;
+    }
+    else if(energy > 4)
+    {
+        energyMod = 3;
+    }
+    else
+    {
+        energyMod = 4;
+    }
+
+    statMod = (kills - deaths)/2;
+
+    formModifier = statMod - energyMod;
 }
 
 string Player::getRoleString()

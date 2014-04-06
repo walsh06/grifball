@@ -324,3 +324,15 @@ string Team::getName()
     return name;
 }
 
+void Team::setEndRound()
+{
+    for(int i = 0; i < 5;i++)
+    {
+        subs[i]->resetEnergy();
+        subs[i]->calculateFormModifier();
+        players[i]->decreaseEnergy();
+        players[i]->calculateFormModifier();
+    }
+}
+
+

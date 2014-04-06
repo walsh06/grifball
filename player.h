@@ -26,7 +26,9 @@ using namespace std;
 class Player
 {
 private:
-    int attack, pass, agility, jumping;
+    int attack, pass, agility, jumping, stamina;
+    int energy;
+    int formModifier;
 
     int mentality;
     int with_ball[5];
@@ -68,6 +70,10 @@ public:
     void setMove(int move);
     void setTeam(int team);
     void setMentality(int mentality);
+    void resetEnergy();
+    void decreaseEnergy();
+
+    void calculateFormModifier();
 
     string getRoleString();
     int getRole();

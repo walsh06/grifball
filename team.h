@@ -26,6 +26,8 @@ public:
     Player* getSub(int playerNum);
     void addPlayer(Player *p);
 
+    void setEndRound();
+
     int getScore();
     void addScore();
     void resetScore();
@@ -33,6 +35,7 @@ public:
     void setPlayerMentality(int playerNum, int mentality);
     void startSpawn();
     void pickTeam();
+
 
     void makeSub(int playerIndex, int subIndex);
     int getNumSubs();
