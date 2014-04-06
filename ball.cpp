@@ -56,7 +56,7 @@ void Ball::drop()
 
 void Ball::reset()
 {
-    setPosX(3);
+    setPosX(4);
     setPosY(3);
     drop();
 }

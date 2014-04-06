@@ -34,7 +34,7 @@ MatchScreen* MainWindow::getMatchScreen()
 
 void MainWindow::closeEvent(QCloseEvent *)
 {
-    delete(match);
+    //delete(match);
 }
 
 //======================

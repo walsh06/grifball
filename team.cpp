@@ -40,11 +40,11 @@ Team::Team(int n)
         players[2]->setRole(2);
         players[3]->setRole(3);
         players[4]->setRole(2);
-        players[0]->setPosX(8);players[0]->setPosY(1);
-        players[1]->setPosX(8);players[1]->setPosY(2);
-        players[2]->setPosX(8);players[2]->setPosY(3);
-        players[3]->setPosX(8);players[3]->setPosY(4);
-        players[4]->setPosX(8);players[4]->setPosY(5);
+        players[0]->setPosX(Player::FIELD_WIDTH);players[0]->setPosY(1);
+        players[1]->setPosX(Player::FIELD_WIDTH);players[1]->setPosY(2);
+        players[2]->setPosX(Player::FIELD_WIDTH);players[2]->setPosY(3);
+        players[3]->setPosX(Player::FIELD_WIDTH);players[3]->setPosY(4);
+        players[4]->setPosX(Player::FIELD_WIDTH);players[4]->setPosY(5);
         players[0]->setTeam(2);
         players[1]->setTeam(2);
         players[2]->setTeam(2);
@@ -107,11 +107,11 @@ void Team::startSpawn()
     }
     else if(players[0]->getTeam() == 2)
     {
-        players[0]->setPosX(6);players[0]->setPosY(1);
-        players[1]->setPosX(6);players[1]->setPosY(2);
-        players[2]->setPosX(6);players[2]->setPosY(3);
-        players[3]->setPosX(6);players[3]->setPosY(4);
-        players[4]->setPosX(6);players[4]->setPosY(5);
+        players[0]->setPosX(Player::FIELD_WIDTH);players[0]->setPosY(1);
+        players[1]->setPosX(Player::FIELD_WIDTH);players[1]->setPosY(2);
+        players[2]->setPosX(Player::FIELD_WIDTH);players[2]->setPosY(3);
+        players[3]->setPosX(Player::FIELD_WIDTH);players[3]->setPosY(4);
+        players[4]->setPosX(Player::FIELD_WIDTH);players[4]->setPosY(5);
     }
 }
 

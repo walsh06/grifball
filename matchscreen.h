@@ -14,6 +14,7 @@
 
 #include "player.h"
 #include "team.h"
+#include "ball.h"
 
 using namespace std;
 
@@ -42,7 +43,7 @@ public:
 
     void clearMainOutput();
     void tick(int time);
-    void displayPlayers(Team *teamOne, Team *teamTwo);
+    void displayPlayers(Team *teamOne, Team *teamTwo, Ball *ball);
 
 
 private:

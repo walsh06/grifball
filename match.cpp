@@ -26,7 +26,6 @@ void Match::sim(MatchScreen* screen)
         screen->tick(timer);
         cout << teamOne->getPlayer(0)->getRole()<< endl;
         screen->resetKillFeed();
-        screen->displayPlayers(teamOne, teamTwo);
         cout<< "TIME: " << timer << endl;
         setMoveOrder();
         for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
@@ -77,6 +76,7 @@ void Match::sim(MatchScreen* screen)
         }
     cout << "BALL TEAM: " << ball->getTeam() << " PLAYER: " << ball->getPlayer() << endl;
     screen->updateStatScreen(teamOne, teamTwo);
+    screen->displayPlayers(teamOne, teamTwo, ball);
 
     QTime dieTime= QTime::currentTime().addSecs(1);
         while( QTime::currentTime() < dieTime )
@@ -323,7 +323,7 @@ void Match::setMissPass(int x, int y)
     while(finished == false)
     {
         ranX = -1; ranY = -1;
-        while(ranX < 0 || ranX > 8)
+        while(ranX < 0 || ranX > Player::FIELD_WIDTH)
         {
             ranX = ((rand()% 3) -1) + x;
         }
@@ -449,7 +449,7 @@ void Match::moveTowardGoal(Player *p)
 
     if(team == 1)
     {
-        x = 8;
+        x = Player::FIELD_WIDTH;
         y = 3;
     }
     else if(team == 2)
@@ -493,7 +493,7 @@ void Match::moveToOwnGoal(Player *p)
     }
     else if(team == 2)
     {
-        x = 8;
+        x = Player::FIELD_WIDTH;
         y = 3;
     }
 

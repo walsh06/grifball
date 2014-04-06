@@ -154,7 +154,7 @@ void MatchScreen::clearMainOutput()
     ui->mainOutput->setText("");
 }
 
-void MatchScreen::displayPlayers(Team *teamOne, Team *teamTwo)
+void MatchScreen::displayPlayers(Team *teamOne, Team *teamTwo, Ball *ball)
 {
     QGraphicsScene *scene = new QGraphicsScene(this);
     vector<Player *> playersOne = teamOne->getPlayers();
@@ -185,6 +185,7 @@ void MatchScreen::displayPlayers(Team *teamOne, Team *teamTwo)
         posModY = rand()%50;
         drawX = (x * 50) + posModX;
         drawY = (y * 50) + posModY;
+
         if(playersTwo[i]->getStatus() == Player::HAS_BALL)
         {
             scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *yellowBrush);
@@ -193,6 +194,13 @@ void MatchScreen::displayPlayers(Team *teamOne, Team *teamTwo)
         {
             scene->addEllipse(drawX, drawY, 10, 10, *blackPen, *blueBrush);
         }
+    }
+
+    if(ball->getPlayer() == -1)
+    {
+        drawX = ball->getPosX() * 50;
+        drawY = ball->getPosY() * 50;
+        scene->addEllipse(drawX, drawY, 5, 5, *blackPen, *yellowBrush);
     }
 
     ui->field->setScene(scene);
