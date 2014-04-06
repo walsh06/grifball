@@ -1,5 +1,10 @@
 #include "match.h"
 
+Match::~Match()
+{
+
+}
+
 Match::Match(string teamOneName, string teamTwoName)
 {
     teamOne = new Team(Filehelper::getTeamFromFile(teamOneName), 1, teamOneName);
