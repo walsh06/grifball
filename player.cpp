@@ -18,6 +18,7 @@ Player::Player(string name, int attack, int pass, int jump, int agility, int num
     resetDeath();
     resetScore();
     mentality = 1;
+    energy = 20;
 }
 
 void Player::kill()
@@ -505,4 +506,21 @@ vector<string> Player::getRatingLine()
     ratingLine.push_back(passStream.str());
 
     return ratingLine;
+}
+
+vector<string> Player::getStatLine()
+{
+    stringstream killStream, deathStream, scoreStream, energyStream;
+    killStream << kills;
+    deathStream << deaths;
+    scoreStream << scores;
+    energyStream << energy;
+
+    vector<string> statLine;
+    statLine.push_back(killStream.str());
+    statLine.push_back(deathStream.str());
+    statLine.push_back(scoreStream.str());
+    statLine.push_back(energyStream.str());
+
+    return statLine;
 }

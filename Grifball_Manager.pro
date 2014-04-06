@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     match.cpp \
     ball.cpp \
     filehelper.cpp \
-    matchscreen.cpp
+    matchscreen.cpp \
+    tournament.cpp
 
 HEADERS  += mainwindow.h \
     player.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     ball.h \
     filehelper.h \
     matchscreen.h \
-    team.h
+    team.h \
+    tournament.h
 
 FORMS    += mainwindow.ui \
     matchscreen.ui

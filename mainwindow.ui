@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="MatchScreen" name="matchWidget"/>
     <widget class="QWidget" name="roundScreen">
@@ -47,7 +47,7 @@
        <widget class="QPushButton" name="startButton">
         <property name="geometry">
          <rect>
-          <x>220</x>
+          <x>240</x>
           <y>220</y>
           <width>231</width>
           <height>23</height>
@@ -86,7 +86,7 @@
        <widget class="QLabel" name="teamOneName">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>60</x>
           <y>110</y>
           <width>111</width>
           <height>31</height>
@@ -99,7 +99,7 @@
        <widget class="QLCDNumber" name="teamTwoScore">
         <property name="geometry">
          <rect>
-          <x>360</x>
+          <x>390</x>
           <y>90</y>
           <width>120</width>
           <height>80</height>
@@ -247,10 +247,10 @@
        <widget class="Line" name="line">
         <property name="geometry">
          <rect>
-          <x>490</x>
+          <x>500</x>
           <y>10</y>
           <width>16</width>
-          <height>181</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="orientation">
@@ -293,7 +293,7 @@
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>510</x>
+          <x>520</x>
           <y>30</y>
           <width>31</width>
           <height>16</height>
@@ -306,7 +306,7 @@
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>510</x>
+          <x>530</x>
           <y>70</y>
           <width>21</width>
           <height>16</height>
@@ -332,7 +332,7 @@
        <widget class="QLabel" name="one_agil">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>385</x>
           <y>50</y>
           <width>21</width>
           <height>16</height>
@@ -358,7 +358,7 @@
        <widget class="QLabel" name="one_pass">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>50</y>
           <width>21</width>
           <height>16</height>
@@ -384,7 +384,7 @@
        <widget class="QLabel" name="two_agil">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>385</x>
           <y>80</y>
           <width>21</width>
           <height>16</height>
@@ -397,7 +397,7 @@
        <widget class="QLabel" name="two_pass">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>80</y>
           <width>21</width>
           <height>16</height>
@@ -436,7 +436,7 @@
        <widget class="QLabel" name="three_agil">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>385</x>
           <y>120</y>
           <width>21</width>
           <height>16</height>
@@ -449,7 +449,7 @@
        <widget class="QLabel" name="three_pass">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>120</y>
           <width>21</width>
           <height>16</height>
@@ -488,7 +488,7 @@
        <widget class="QLabel" name="four_agil">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>385</x>
           <y>160</y>
           <width>21</width>
           <height>16</height>
@@ -501,7 +501,7 @@
        <widget class="QLabel" name="four_pass">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>160</y>
           <width>21</width>
           <height>16</height>
@@ -540,7 +540,7 @@
        <widget class="QLabel" name="five_agil">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>385</x>
           <y>200</y>
           <width>21</width>
           <height>16</height>
@@ -553,7 +553,7 @@
        <widget class="QLabel" name="five_pass">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>200</y>
           <width>21</width>
           <height>16</height>
@@ -576,7 +576,7 @@
          <string>TextLabel</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_23">
+       <widget class="QLabel" name="headerOne">
         <property name="geometry">
          <rect>
           <x>340</x>
@@ -589,12 +589,12 @@
          <string>Attack</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_24">
+       <widget class="QLabel" name="headerTwo">
         <property name="geometry">
          <rect>
-          <x>385</x>
+          <x>380</x>
           <y>10</y>
-          <width>31</width>
+          <width>41</width>
           <height>16</height>
          </rect>
         </property>
@@ -602,12 +602,12 @@
          <string>Agility</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_25">
+       <widget class="QLabel" name="headerThree">
         <property name="geometry">
          <rect>
           <x>420</x>
           <y>10</y>
-          <width>31</width>
+          <width>41</width>
           <height>16</height>
          </rect>
         </property>
@@ -615,12 +615,12 @@
          <string>Jump</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_26">
+       <widget class="QLabel" name="headerFour">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>460</x>
           <y>10</y>
-          <width>31</width>
+          <width>41</width>
           <height>16</height>
          </rect>
         </property>
@@ -702,6 +702,16 @@
         </property>
         <property name="text">
          <string>Mentality</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="changeRatings">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>230</y>
+          <width>141</width>
+          <height>22</height>
+         </rect>
         </property>
        </widget>
       </widget>

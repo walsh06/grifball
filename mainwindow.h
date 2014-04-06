@@ -62,6 +62,8 @@ private slots:
 
     void closeEvent(QCloseEvent *);
 
+    void on_changeRatings_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     void initTacticScreen();
@@ -69,6 +71,7 @@ private:
     void initRoleBox();
     void initMenBox();
     void loadSingleMenBox(int num);
+    void initStatScreen();
 
     QLabel* ratings[5][4];
     int playerIndex, subIndex;

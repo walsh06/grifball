@@ -94,6 +94,61 @@ void Match::sim(MatchScreen* screen)
     cout << teamOne->getScore() << "-" << teamTwo->getScore() << endl;
 }
 
+void Match::quickSim()
+{
+    resetRound();
+    int timer;
+
+    for(timer = 0; timer < 180 && roundOver == false; timer+=3)
+    {
+        setMoveOrder();
+        for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
+        {
+            Player* p = playersToMove[i];
+            checkBall(p);
+            setPlayerStatus(p);
+            int act = p->getAction();
+
+            if(act == p->MOVE_UP)
+            {
+                moveUp(p);
+            }
+            else if(act == p->MOVE_DOWN)
+            {
+                moveBack(p);
+            }
+            else if(act == p->MOVE_LEFT)
+            {
+                moveLeft(p);
+            }
+            else if(act == p->MOVE_RIGHT)
+            {
+                moveRight(p);
+            }
+            else if(act == p->PASS)
+            {
+                pass(p);
+            }
+            else if(act == p->MOVE_TO_BALL)
+            {
+                moveTowardBall(p);
+            }
+            else if(act == p->ATTACK)
+            {
+                attack(p);
+            }
+            else if(act == p->MOVE_TO_GOAL)
+            {
+                moveTowardGoal(p);
+            }
+            else if(act == p->MOVE_TO_OWN_GOAL)
+            {
+                moveToOwnGoal(p);
+            }
+        }
+    }
+}
+
 //===================================
 //Win
 //===================================

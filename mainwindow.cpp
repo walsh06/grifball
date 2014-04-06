@@ -148,6 +148,41 @@ void MainWindow::initTacticScreen()
     }
 }
 
+void MainWindow::initStatScreen()
+{
+    for(int i = 0; i < 5; i++)
+    {
+        vector<string> statLine = match->getTeamOne()->getPlayer(i)->getStatLine();
+
+        ratings[i][0]->setText(QString::fromStdString(statLine[0]));
+        ratings[i][1]->setText(QString::fromStdString(statLine[1]));
+        ratings[i][2]->setText(QString::fromStdString(statLine[2]));
+        ratings[i][3]->setText(QString::fromStdString(statLine[3]));
+    }
+}
+
+void MainWindow::on_changeRatings_currentIndexChanged(int index)
+{
+    if(index == 0)
+    {
+        initTacticScreen();
+        ui->headerOne->setText(QString::fromStdString("Attack"));
+        ui->headerTwo->setText(QString::fromStdString("Agility"));
+        ui->headerThree->setText(QString::fromStdString("Jump"));
+        ui->headerFour->setText(QString::fromStdString("Pass"));
+    }
+    else if(index == 1)
+    {
+        initStatScreen();
+        ui->headerOne->setText(QString::fromStdString("Kills"));
+        ui->headerTwo->setText(QString::fromStdString("Deaths"));
+        ui->headerThree->setText(QString::fromStdString("Scores"));
+        ui->headerFour->setText(QString::fromStdString("Energy"));
+    }
+}
+
+//====================================================================
+
 void MainWindow::on_startButton_clicked()
 {
     if(gameOver == true)
@@ -317,5 +352,7 @@ void MainWindow::on_start_match_clicked()
     ui->teamOneName->setText(QString::fromStdString(match->getTeamOne()->getName()));
     ui->teamTwoName->setText(QString::fromStdString(match->getTeamTwo()->getName()));
     ui->stackedWidget->setCurrentIndex(1);
+    ui->changeRatings->addItem(QString::fromStdString("Ratings"));
+    ui->changeRatings->addItem(QString::fromStdString("Stats"));
 
 }

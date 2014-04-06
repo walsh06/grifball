@@ -30,12 +30,34 @@ int Ball::getPosY()
 
 void Ball::setPosX(int x)
 {
-    posX = x;
+    if(x < 0)
+    {
+        posX = 0;
+    }
+    else if(x > 8)
+    {
+        posX = 8;
+    }
+    else
+    {
+        posX = x;
+    }
 }
 
 void Ball::setPosY(int y)
 {
-    posY = y;
+    if(y < 0)
+    {
+        posY = 0;
+    }
+    else if(y > 6)
+    {
+        posY = 6;
+    }
+    else
+    {
+        posY = y;
+    }
 }
 
 void Ball::setTeam(int teamNum)

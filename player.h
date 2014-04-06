@@ -26,7 +26,7 @@ using namespace std;
 class Player
 {
 private:
-    int attack, pass, agility, jumping;
+    int attack, pass, agility, jumping, energy;
 
     int mentality;
     int with_ball[5];
@@ -94,6 +94,7 @@ public:
 
     vector<string> getStatString();
     vector<string> getRatingLine();
+    vector<string> getStatLine();
 
     void respawn();
     void kill();
