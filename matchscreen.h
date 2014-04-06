@@ -1,14 +1,20 @@
 #ifndef MATCHSCREEN_H
 #define MATCHSCREEN_H
 
+#include <QtCore>
+#include <QtGui>
 #include <QWidget>
 #include <QLabel>
 #include <string>
 #include <sstream>
 #include <iostream>
 
+#include <time.h>
+#include <ctime>
+
 #include "player.h"
 #include "team.h"
+#include "ball.h"
 
 using namespace std;
 
@@ -37,9 +43,14 @@ public:
 
     void clearMainOutput();
     void tick(int time);
+    void displayPlayers(Team *teamOne, Team *teamTwo, Ball *ball);
+
 
 private:
     Ui::MatchScreen *ui;
+    QBrush * redBrush, *yellowBrush, *blueBrush;
+    QPen * blackPen;
+
 
     QLabel* statsOne[5][5], *statsTwo[5][5];
     void updateOutput(string message);

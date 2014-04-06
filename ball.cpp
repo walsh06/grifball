@@ -4,7 +4,7 @@ Ball::Ball()
 {
     team = -1;
     player = -1;
-    posX = 3;
+    posX = 4;
     posY = 3;
 }
 
@@ -56,7 +56,7 @@ void Ball::drop()
 
 void Ball::reset()
 {
-    setPosX(3);
+    setPosX(4);
     setPosY(3);
     drop();
 }

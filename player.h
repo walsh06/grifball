@@ -54,6 +54,7 @@ public:
     static const int HAS_BALL = 1, TEAM_WITH_BALL = 2, WITHOUT_BALL = 3, OPP_IN_SQUARE = 4, LOOSE_BALL = 5, DEAD = 6, BALL_WITH_OPP = 7;
     static const int SCORER = 1, ATTACKER = 2, DEFENDER = 3;
     static const int maxRating = 20;
+    static const int FIELD_WIDTH = 8;
 
     Player(string name, int attack, int pass, int jump, int agility, int number);
 

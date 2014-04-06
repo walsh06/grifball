@@ -38,7 +38,7 @@ void Player::respawn()
     }
     else if(team == 2)
     {
-        setPosX(6);
+        setPosX(FIELD_WIDTH);
         setPosY(ranPos);
     }
 }
@@ -226,7 +226,7 @@ void Player::setMove(int move)
 
 void Player::setPosX(int x)
 {
-    if(x >= 0 && x <= 6 )
+    if(x >= 0 && x <= FIELD_WIDTH )
     {
         position[0] = x;
     }
