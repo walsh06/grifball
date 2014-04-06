@@ -32,6 +32,11 @@ MatchScreen* MainWindow::getMatchScreen()
     return ui->matchWidget;
 }
 
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    delete(match);
+}
+
 //======================
 //Tactic Screen
 //======================

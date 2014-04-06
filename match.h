@@ -68,6 +68,7 @@ private:
 
 public:
     Match(string teamOneName, string teamTwoName);
+    ~Match();
     void sim(MatchScreen* screen);
 
     Team* getTeamOne();

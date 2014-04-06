@@ -19,7 +19,6 @@ MatchScreen::MatchScreen(QWidget *parent) :
     statsTwo[0][2] = ui->two_three;statsTwo[1][2] = ui->two_three_kills;statsTwo[2][2] = ui->two_three_deaths;statsTwo[3][2] = ui->two_three_scores;
     statsTwo[0][3] = ui->two_four;statsTwo[1][3] = ui->two_four_kills;statsTwo[2][3] = ui->two_four_deaths;statsTwo[3][3] = ui->two_four_scores;
     statsTwo[0][4] = ui->two_five;statsTwo[1][4] = ui->two_five_kills;statsTwo[2][4] = ui->two_five_deaths;statsTwo[3][4] = ui->two_five_scores;
-
 }
 
 MatchScreen::~MatchScreen()

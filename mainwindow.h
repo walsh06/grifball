@@ -60,6 +60,8 @@ private slots:
 
     void on_menFive_currentIndexChanged(int index);
 
+    void closeEvent(QCloseEvent *);
+
 private:
     Ui::MainWindow *ui;
     void initTacticScreen();
