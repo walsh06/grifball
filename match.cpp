@@ -96,12 +96,15 @@ void Match::sim(MatchScreen* screen)
 
 void Match::quickSim()
 {
+    screen = NULL;
     resetRound();
     int timer;
 
     for(timer = 0; timer < 180 && roundOver == false; timer+=3)
     {
+
         setMoveOrder();
+
         for(int i = 0; i < playersToMove.size() && roundOver == false; i++)
         {
             Player* p = playersToMove[i];
@@ -201,11 +204,17 @@ void Match::attack(Player *p)
         //cout << " and Kills " << opp->getName() << endl;
         opp->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(opp));
-        screen->updateKillFeed(p, opp);
+        if(screen != NULL)
+        {
+            screen->updateKillFeed(p, opp);
+        }
 
         if(ball->getPlayer() == opp->getNumber())
         {
-            screen->updateKill(p, opp);
+            if(screen != NULL)
+            {
+                screen->updateKill(p, opp);
+            }
             ball->drop();
         }
 
@@ -214,7 +223,10 @@ void Match::attack(Player *p)
     {
         if(ball->getPlayer() == opp->getNumber())
         {
-            screen->updateDodge(p, opp);
+            if(screen != NULL)
+            {
+                screen->updateDodge(p, opp);
+            }
             ball->drop();
         }
         //cout << " but misses " << opp->getName() << endl;
@@ -263,12 +275,18 @@ void Match::dodge(Player *p)
         p->kill();
         playersToMove.erase(playersToMove.begin()+ findPlayer(p));
         ball->drop();
-        screen->updateKill(opp, p);
-        screen->updateKillFeed(opp, p);
+        if(screen != NULL)
+        {
+            screen->updateKill(opp, p);
+            screen->updateKillFeed(opp, p);
+        }
     }
     else
     {
-        screen->updateDodge(opp, p);
+        if(screen != NULL)
+        {
+            screen->updateDodge(opp, p);
+        }
         //cout << " and gets past" << opp->getName() << endl;
         if(team == 1)
         {
@@ -299,8 +317,10 @@ void Match::pass(Player *p)
     if(passRoll > 21)
     {
         //cout << "To " << target->getName() << endl;
-
-        screen->updatePass(p, target);
+        if(screen != NULL)
+        {
+            screen->updatePass(p, target);
+        }
         updateBall(target);
         setPlayerStatus(target);
         setPlayerStatus(p);
@@ -309,7 +329,10 @@ void Match::pass(Player *p)
     {
         stringstream message ;
         message << p->getName() << " missed with a bad pass to " << target->getName();
-        screen->updateMissPass(p, target);
+        if(screen != NULL)
+        {
+            screen->updateMissPass(p, target);
+        }
         //cout << "Misses pass to " << target->getName() << " , Loose Ball!!" << endl;
         ball->drop();
         setMissPass(target->getPosX(), target->getPosY());
@@ -422,7 +445,10 @@ void Match::moveUp(Player *p)
         if(p->getNumber() == ball->getPlayer())
         {
             updateBall(p);
-            screen->updateMove(p, p->MOVE_UP);
+            if(screen != NULL)
+            {
+                screen->updateMove(p, p->MOVE_UP);
+            }
         }
     }
 
@@ -447,7 +473,10 @@ void Match::moveBack(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
-        screen->updateMove(p, p->MOVE_DOWN);
+        if(screen != NULL)
+        {
+            screen->updateMove(p, p->MOVE_DOWN);
+        }
     }
 }
 
@@ -469,7 +498,10 @@ void Match::moveLeft(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
-        screen->updateMove(p, p->MOVE_LEFT);
+        if(screen != NULL)
+        {
+            screen->updateMove(p, p->MOVE_LEFT);
+        }
     }
 }
 
@@ -492,7 +524,10 @@ void Match::moveRight(Player *p)
     if(p->getNumber() == ball->getPlayer())
     {
         updateBall(p);
-        screen->updateMove(p, p->MOVE_RIGHT);
+        if(screen != NULL)
+        {
+            screen->updateMove(p, p->MOVE_RIGHT);
+        }
     }
 }
 
@@ -605,7 +640,10 @@ void Match::checkBall(Player *p)
     if(py == y && px == x && ball->getTeam() == -1)
     {
        updateBall(p);
-       screen->updatePickup(p);
+       if(screen != NULL)
+       {
+        screen->updatePickup(p);
+       }
     }
 }
 
@@ -758,7 +796,10 @@ void Match::resetRound()
 {
     teamOne->startSpawn();
     teamTwo->startSpawn();
-    screen->clearMainOutput();
+    if(screen != NULL)
+    {
+        screen->clearMainOutput();
+    }
     ball->reset();
     roundOver = false;
 }

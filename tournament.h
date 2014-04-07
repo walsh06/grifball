@@ -2,20 +2,28 @@
 #define TOURNAMENT_H
 
 #include <map>
+#include <string>
+#include <sstream>
 #include "team.h"
+#include "match.h"
 
 using namespace std;
 
 class Tournament
 {
 private:
-    map<Team *, int> tournamentTree;
+    map<int, Team *> tournamentTree;
+
     int round;
-    int roundMatches[5] = {1, 2, 4, 8, 16};
+    int numTeams;
+    int roundMatches[4] = {2, 4, 8, 16};
 
 public:
     Tournament();
     void simRound();
+    void addTeam(Team *team);
+    int getRound();
+    string toString();
 
 };
 

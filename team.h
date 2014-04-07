@@ -16,7 +16,6 @@ private:
     int score;
     string name;
 
-    void setTeam(int team);
     void initTeam();
 
 public:
@@ -33,6 +32,7 @@ public:
     void setPlayerMentality(int playerNum, int mentality);
     void startSpawn();
     void pickTeam();
+    void setTeam(int team);
 
     void makeSub(int playerIndex, int subIndex);
     int getNumSubs();

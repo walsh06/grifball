@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     ball.cpp \
     filehelper.cpp \
     matchscreen.cpp \
-    tournament.cpp
+    tournament.cpp \
+    tournamentscreen.cpp
 
 HEADERS  += mainwindow.h \
     player.h \
@@ -30,9 +31,11 @@ HEADERS  += mainwindow.h \
     filehelper.h \
     matchscreen.h \
     team.h \
-    tournament.h
+    tournament.h \
+    tournamentscreen.h
 
 FORMS    += mainwindow.ui \
-    matchscreen.ui
+    matchscreen.ui \
+    tournamentscreen.ui
 
 QMAKE_CXXFLAGS += -std=c++11

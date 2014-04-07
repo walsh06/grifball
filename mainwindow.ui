@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="MatchScreen" name="matchWidget"/>
     <widget class="QWidget" name="roundScreen">
@@ -38,7 +38,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="game">
        <attribute name="title">
@@ -752,6 +752,7 @@
       </property>
      </widget>
     </widget>
+    <widget class="TournamentScreen" name="tournamentWidget"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -780,6 +781,12 @@
    <class>MatchScreen</class>
    <extends>QWidget</extends>
    <header>matchscreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TournamentScreen</class>
+   <extends>QWidget</extends>
+   <header>tournamentscreen.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
