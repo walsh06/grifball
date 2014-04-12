@@ -21,6 +21,8 @@ public:
 private slots:
     void on_sim_clicked();
 
+    void changeScreen(int);
+
 private:
     Ui::TournamentScreen *ui;
     Tournament* tournament;

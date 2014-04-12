@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>500</height>
+    <width>790</width>
+    <height>590</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,11 +18,11 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>681</width>
-     <height>481</height>
+     <width>771</width>
+     <height>571</height>
     </rect>
    </property>
-   <widget class="MatchScreen" name="match"/>
+   <widget class="TacticScreen" name="TacticWidget"/>
    <widget class="QWidget" name="tournament_home">
     <widget class="QTextBrowser" name="display">
      <property name="geometry">
@@ -47,14 +47,79 @@
       <string>sim</string>
      </property>
     </widget>
+    <widget class="QTextBrowser" name="results">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>240</y>
+       <width>91</width>
+       <height>192</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page">
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>400</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>60</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_2">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>130</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_3">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>170</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_4">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>210</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MatchScreen</class>
+   <class>TacticScreen</class>
    <extends>QWidget</extends>
-   <header>matchscreen.h</header>
+   <header>tacticscreen.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
